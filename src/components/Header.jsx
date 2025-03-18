@@ -4,10 +4,14 @@ import {
   MoonIcon,
 } from "@heroicons/react/24/solid";
 import SearchModal from "./SearchModal";
+import { useSidebar } from "../contexts/SidebarContext";
+import { useSearchModal} from "../contexts/SearchModalContext";
+import { useTheme } from "../contexts/ThemeContext.";
 
-function Header({ darkMode , toggleSidebar , isOpenSearchModal , setIsOpenSearchModal}) {
-  // const [isOpenSearchModal, setIsOpenSearchModal] = useState(false);
-  const {isDarkMode, setIsDarkMode} = darkMode;
+function Header() {
+  const {theme , toggleTheme} = useTheme()
+  const {toggleSidebar} = useSidebar();
+  const {setIsOpenSearchModal} = useSearchModal();
   return (
     <>
       {/* <SearchModal isDarkMode={isDarkMode} onOpen={setIsOpenSearchModal} open={isOpenSearchModal} /> */}
@@ -26,7 +30,7 @@ function Header({ darkMode , toggleSidebar , isOpenSearchModal , setIsOpenSearch
             <img
               className="w-7 h-7"
               src={
-                isDarkMode
+                theme === 'dark'
                   ? "https://flix3drama.com/_app/immutable/assets/dark-search-normal-9c11321f.svg"
                   : "https://flix3drama.com/_app/immutable/assets/search-normal-ce312e83.svg"
               }
@@ -34,13 +38,13 @@ function Header({ darkMode , toggleSidebar , isOpenSearchModal , setIsOpenSearch
             />
           </button>
           <button
-            onClick={setIsDarkMode}
+            onClick={toggleTheme}
             className="p-4 dark:bg-[#241A2B] rounded-xl bg-[#FBFBFB] cursor-pointer"
           >
             <img
               className="w-7 h-7"
               src={
-                isDarkMode
+                theme === 'dark'
                   ? "https://flix3drama.com/_app/immutable/assets/sun-1db16952.svg"
                   : "https://flix3drama.com/_app/immutable/assets/moon-08401da2.svg"
               }

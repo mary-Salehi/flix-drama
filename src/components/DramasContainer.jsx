@@ -47,7 +47,7 @@ function DramasContainer() {
               مشاهده
             </a>
           </div>
-          <Dramas />
+          <Dramas page='home' />
         </div>
       ))}
     </div>

@@ -6,7 +6,8 @@ export const dramas = [
     lastUpdate: "اسفند 12 1403",
     latestEpisode: "6",
     imdb: '8.2',
-    imageUrl: 'https://uploadcenter.flix3drama.com/images/posters/GOFH5h79i1.webp'
+    imageUrl: 'https://uploadcenter.flix3drama.com/images/posters/GOFH5h79i1.webp',
+    summary: 'یک رسوایی، حرفه «وی ژی»، طراح کمیک را نابود می‌کند؛ نام مستعار و حقوق...'
   },
   {
     id:2,
@@ -15,7 +16,8 @@ export const dramas = [
     lastUpdate: "اسفند 12 1403",
     latestEpisode: "6",
     imdb: '8.2',
-    imageUrl: 'https://uploadcenter.flix3drama.com/images/posters/GOFH5h79i1.webp'
+    imageUrl: 'https://uploadcenter.flix3drama.com/images/posters/GOFH5h79i1.webp',
+    summary: 'یک رسوایی، حرفه «وی ژی»، طراح کمیک را نابود می‌کند؛ نام مستعار و حقوق...'
   },
   {
     id:3,
@@ -24,7 +26,8 @@ export const dramas = [
     lastUpdate: "اسفند 12 1403",
     latestEpisode: "6",
     imdb: '8.2',
-    imageUrl: 'https://uploadcenter.flix3drama.com/images/posters/GOFH5h79i1.webp'
+    imageUrl: 'https://uploadcenter.flix3drama.com/images/posters/GOFH5h79i1.webp',
+    summary: 'یک رسوایی، حرفه «وی ژی»، طراح کمیک را نابود می‌کند؛ نام مستعار و حقوق...'
   },
   {
     id:4,
@@ -33,6 +36,7 @@ export const dramas = [
     lastUpdate: "اسفند 12 1403",
     latestEpisode: "6",
     imdb: '8.2',
-    imageUrl: 'https://uploadcenter.flix3drama.com/images/posters/GOFH5h79i1.webp'
+    imageUrl: 'https://uploadcenter.flix3drama.com/images/posters/GOFH5h79i1.webp',
+    summary: 'یک رسوایی، حرفه «وی ژی»، طراح کمیک را نابود می‌کند؛ نام مستعار و حقوق...'
   },
 ];

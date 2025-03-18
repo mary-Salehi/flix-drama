@@ -1,10 +1,15 @@
-function SearchModal({ isDarkMode, onOpen, open }) {
-  if (!open) return;
+import { useSearchModal } from "../contexts/SearchModalContext";
+import { useTheme } from "../contexts/ThemeContext.";
+
+function SearchModal() {
+  const { theme } = useTheme();
+  const { isOpenSearchModal, setIsOpenSearchModal } = useSearchModal();
+  if (!isOpenSearchModal) return;
   return (
     <div>
       {/* backdrop */}
       <div
-        onClick={() => onOpen(false)}
+        onClick={() => setIsOpenSearchModal(false)}
         className="fixed inset-0 bg-black/30 backdrop-blur-2xl z-50"
       ></div>
       {/* modal */}
@@ -12,7 +17,7 @@ function SearchModal({ isDarkMode, onOpen, open }) {
         <img
           className="w-7 h-7"
           src={
-            isDarkMode
+            theme === "dark"
               ? "https://flix3drama.com/_app/immutable/assets/dark-search-normal-9c11321f.svg"
               : "https://flix3drama.com/_app/immutable/assets/search-normal-ce312e83.svg"
           }

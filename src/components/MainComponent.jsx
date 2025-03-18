@@ -1,12 +1,8 @@
-import { useState } from "react";
-import Dramas from "./Dramas";
-import Header from "./Header";
-import HeaderSwiper from "./HeaderSwiper";
-import Search from "./Search";
-import DramasContainer from "./DramasContainer";
-import Footer from "./Footer";
-import Sidebar from "./Sidebar";
-import SearchModal from "./SearchModal";
+
+import { Route, Routes } from "react-router-dom";
+import Layout from "./Layout";
+import Home from "../pages/Home";
+import Posts from "../pages/Posts";
 
 const sidebarLinks = [
   {
@@ -41,42 +37,16 @@ const sidebarLinks = [
   },
 ];
 
-function MainComponent({ setIsDarkMode, isDarkMode }) {
-  const darkMode = { isDarkMode, setIsDarkMode };
-  const [isOpenSearchModal, setIsOpenSearchModal] = useState(false);
-  const [isOpenSidebar, setIsOpenSidebar] = useState(false);
-  const toggleSidebar = () => {
-    setIsOpenSidebar((prev) => !prev);
-  };
+function MainComponent() {
   return (
     <main className="bg-background-light dark:bg-background-dark min-h-lvh">
-      <SearchModal
-        isDarkMode={isDarkMode}
-        onOpen={setIsOpenSearchModal}
-        open={isOpenSearchModal}
-      />
-      <Header
-        darkMode={darkMode}
-        toggleSidebar={toggleSidebar}
-        setIsOpenSearchModal={setIsOpenSearchModal}
-      />
-      <div className="flex justify-between">
-        {/* sidebar */}
-        <Sidebar
-          darkMode={darkMode}
-          toggleSidebar={toggleSidebar}
-          isOpenSidebar={isOpenSidebar}
-          isOpenSearchModal={isOpenSearchModal}
-          setIsOpenSearchModal={setIsOpenSearchModal}
-        />
-        <div id="components" className="min-w-0 px-5 py-10 pt-[116px] lg:pt-10">
-          <HeaderSwiper />
-          <Search />
-          <DramasContainer />
-          <Footer />
-        </div>
-      </div>
-    </main>
+      <Routes>
+        <Route path="/" element={<Layout/>}>
+          <Route index element={<Home/>}/>
+          <Route path="posts" element={<Posts/>}/>
+        </Route>
+      </Routes>
+    </main> 
   );
 }
 
