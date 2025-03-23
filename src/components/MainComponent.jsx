@@ -3,6 +3,7 @@ import { Route, Routes } from "react-router-dom";
 import Layout from "./Layout";
 import Home from "../pages/Home";
 import Posts from "../pages/Posts";
+import Post from "./Post";
 
 const sidebarLinks = [
   {
@@ -43,6 +44,7 @@ function MainComponent() {
       <Routes>
         <Route path="/" element={<Layout/>}>
           <Route index element={<Home/>}/>
+          <Route path="/posts/:name" element={<Post/>}/>
           <Route path="posts" element={<Posts/>}/>
         </Route>
       </Routes>

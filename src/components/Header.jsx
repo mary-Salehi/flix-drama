@@ -14,7 +14,6 @@ function Header() {
   const {setIsOpenSearchModal} = useSearchModal();
   return (
     <>
-      {/* <SearchModal isDarkMode={isDarkMode} onOpen={setIsOpenSearchModal} open={isOpenSearchModal} /> */}
       <div className="flex lg:hidden items-center justify-between w-full bg-white dark:bg-primary-2-dark fixed top-0 z-20 shadow-xl px-5 py-2">
         <button
           onClick={toggleSidebar}
@@ -65,10 +64,3 @@ function Header() {
 }
 
 export default Header;
-
-function Backdrop({onOpenSidebar , openSidebar}) {
-  if(!openSidebar) return;
-  return (
-    <div onClick={() => onOpenSidebar(false)} className="fixed inset-0 bg-[#060208] backdrop-blur-xl opacity-70 z-30"></div>
-  )
-}

@@ -57,7 +57,7 @@ function Sidebar() {
         } lg:translate-x-0 lg:relative min-h-full bg-white dark:bg-[#100617] fixed top-0 right-0 z-40`}
       >
         <div className=" dark:text-white">
-          <div className="py-5 flex items-center justify-center">
+          <div className="py-5 lg:pb-14 lg:pt-16 flex items-center justify-center">
             <img
               src={
                 theme === 'dark'

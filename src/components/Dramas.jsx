@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { dramas } from "../data";
 function Dramas({ page }) {
   const getClasses = () => {
@@ -72,9 +73,9 @@ export function Drama({ drama, page }) {
         </div>
       </div>
       <div className="flex sm:flex-col-reverse items-center sm:items-end justify-between min-w-fit">
-        <button className="px-5 py-3 text-xs font-bold bg-[#F9F0FF] dark:bg-[#100617] dark:text-white rounded-xl cursor-pointer">
+        <Link to="/posts/my-dear-nemesis" className="px-5 py-3 text-xs font-bold bg-[#F9F0FF] dark:bg-[#100617] dark:text-white rounded-xl cursor-pointer">
           تماشاو دانلود
-        </button>
+        </Link>
         <span className={`rounded-xl w-[45px] h-[45px] flex justify-center items-center bg-yellow-primary font-bold ${page === 'home' ? 'text-white' : 'text-black'}`}>
           {drama.imdb}
         </span>
