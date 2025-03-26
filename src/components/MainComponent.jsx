@@ -4,6 +4,7 @@ import Layout from "./Layout";
 import Home from "../pages/Home";
 import Posts from "../pages/Posts";
 import Post from "./Post";
+import Actors from "../pages/Actors";
 
 const sidebarLinks = [
   {
@@ -46,6 +47,7 @@ function MainComponent() {
           <Route index element={<Home/>}/>
           <Route path="/posts/:name" element={<Post/>}/>
           <Route path="posts" element={<Posts/>}/>
+          <Route path="actors" element={<Actors/>}/>
         </Route>
       </Routes>
     </main> 

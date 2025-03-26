@@ -14,7 +14,7 @@ function Layout() {
 
   console.log(location.pathname)
   return (
-    <main className="bg-background-light dark:bg-background-dark min-h-lvh">
+    <main className="bg-background-light dark:bg-background-dark min-h-lvh max-w-[1440px] mx-auto">
       <SearchModal/>
       <Header />
       <div className="flex">

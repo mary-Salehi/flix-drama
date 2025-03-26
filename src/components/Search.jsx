@@ -1,4 +1,12 @@
+import { useState } from "react";
+
 function Search() {
+  const [searchTerm , setSearchTerm] = useState('');
+
+  const handleClear = () => {
+    setSearchTerm('')
+  }
+
   return (
     <div className="my-14">
       <div className="flex flex-col sm:flex-row sm:items-center bg-white dark:bg-[#241A2B] rounded-2xl gap-y-5 p-3 pr-6 text-sm">
@@ -48,12 +56,14 @@ function Search() {
           <input
             className="w-full focus:outline-0 placeholder:text-[#939191] dark:text-white"
             type="text"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
             placeholder="اسم فیلم یا سریال مد نظر خود را وارد کنید"
           />
         </div>
         <div className="flex shrink-0 items-center justify-center font-semibold sm:text-sm gap-x-4">
-          <button className="text-[#737373] dark:text-white">پاک کردن</button>
-          <button className="bg-[#9600FF] px-5 py-3 rounded-xl text-white">
+          <button onClick={handleClear} className="text-[#737373] dark:text-white cursor-pointer">پاک کردن</button>
+          <button className="bg-[#9600FF] px-5 py-3 rounded-xl text-white cursor-pointer">
             جست و جو
           </button>
         </div>
