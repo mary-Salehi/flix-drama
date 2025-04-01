@@ -4,10 +4,7 @@ import viteLogo from "/vite.svg";
 import "./App.css";
 import MainComponent from "./components/MainComponent";
 import Providers from "./components/Providers";
-import { Route, Routes } from "react-router-dom";
-import Layout from "./components/Layout";
-import Posts from "./pages/Posts";
-import Home from "./pages/Home";
+import './assets/fonts/fonts.css'
 
 function App() {
   return (

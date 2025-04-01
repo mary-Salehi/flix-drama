@@ -1,7 +1,13 @@
 @import "tailwindcss";
+
 @custom-variant dark (&:where(.dark, .dark *));
 
+@import './assets/fonts/fonts.css';
+
 @theme {
+
+  --font-family-sans: 'Vazirmatn RD';
+  
   --color-background-light: #f9f0ff;
   --color-primary-light: #fbfbfb;
   --color-secondary-light: #efe6f5;
@@ -12,4 +18,11 @@
   --color-background-dark: #1a0b24;
   --color-primary-1-dark: #24152e;
   --color-primary-2-dark: #100617;
+
+}
+
+@layer base {
+  html {
+    font-family: var(--font-family-sans);
+  }
 }

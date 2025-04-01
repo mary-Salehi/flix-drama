@@ -20,7 +20,7 @@ function Layout() {
       <div className="flex">
         {/* sidebar */}
         <Sidebar />
-        <div id="components" className={`min-w-0 ${location.pathname.startsWith('/posts/') ? 'p-0 pt-[76px] lg:pt-0' : 'px-5 py-10 pt-[116px] lg:pt-10'} w-full`}>
+        <div id="components" className={`min-w-0 ${location.pathname.startsWith('/posts/') ? 'p-0 pb-10 pt-[76px] lg:pt-0' : 'px-5 py-10 pt-[116px] lg:pt-10'} w-full`}>
           <Outlet/>
           <Footer />
         </div>

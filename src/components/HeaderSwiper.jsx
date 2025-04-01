@@ -64,7 +64,7 @@ function HeaderSwiper() {
               />
               <div className="absolute inset-0 bg-gradient-to-l from-purple-900 opacity-60"></div>
               <div className="absolute top-10 right-10 space-y-6 text-white">
-                <h2 className="text-2xl sm:text-3xl font-bold tracking-[-0.1em]">
+                <h2 className="text-2xl sm:text-3xl font-bold ">
                   {slide.title}
                 </h2>
                 <p className="text-xl sm:text-lg">{slide.subtitle}</p>

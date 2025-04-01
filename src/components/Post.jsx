@@ -1,9 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import { useParams } from "react-router-dom";
+import DescriptionTab from "./PostTabs/DescriptionTab";
+import DownloadTab from "./PostTabs/DownloadTab";
+import CastAndCrewTab from "./PostTabs/CastAndCrewTab";
+import CommentsTab from "./PostTabs/CommentsTab";
 
 function Post() {
   const params = useParams();
-  
+
   return (
     <div className="min-h-screen">
       <div className="relative flex flex-col items-center">
@@ -77,7 +81,7 @@ function Post() {
               </div>
             </div>
             <div className="text-xs lg:text-base flex justify-between">
-              <div className=" flex gap-3 lg:gap-8">
+              <div className=" flex gap-2 lg:gap-8">
                 <div className="flex flex-col justify-between items-center gap-y-5">
                   <span className="font-bold text-center text-[#787878] dark:text-[#C7C7C7]">
                     سال تولید
@@ -147,14 +151,59 @@ function Post() {
           </div>
         </div>
       </div>
-      <div className="flex items-center justify-center border-b border-gray-200 dark:border-[#24152E]">
-        <button className="px-2 pb-2 dark:text-white text-[#24152E] font-semibold whitespace-nowrap border-b-2 border-purple-btn">توضیحات</button>
-        <button className="px-2 pb-2 dark:text-white text-[#24152E] font-semibold whitespace-nowrap">دانلود</button>
-        <button className="px-2 pb-2 dark:text-white text-[#24152E] font-semibold whitespace-nowrap">عوامل</button>
-        <button className="px-2 pb-2 dark:text-white text-[#24152E] font-semibold whitespace-nowrap">نظرات</button>
-      </div>
+      <TabbedInterface/>
     </div>
   );
 }
 
 export default Post;
+
+const tabs = [
+  {
+    id: "description",
+    name: "توضیحات",
+    component: <DescriptionTab />,
+  },
+  {
+    id: "download",
+    name: "دانلود",
+    component: <DownloadTab />,
+  },
+  {
+    id: "cast",
+    name: "عوامل",
+    component: <CastAndCrewTab />,
+  },
+  {
+    id: "comments",
+    name: "نظرات",
+    component: <CommentsTab />,
+  },
+];
+
+function TabbedInterface() {
+  const [activeTab, setActiveTab] = useState(tabs[0].id);
+
+  return (
+    <div>
+      <div className="flex items-center justify-center border-b border-gray-200 dark:border-[#24152E]">
+      {tabs.map((tab) => {
+        return (
+          <button
+          key={tab.id}
+          onClick={() => setActiveTab(tab.id)}
+          className={`px-2 py-3 dark:text-white text-[#24152E] font-semibold whitespace-nowrap cursor-pointer box-border ${activeTab === tab.id ? 'font-black border-b-4 border-purple-btn pb-2' : 'pb-3'}`}
+        >
+          {tab.name}
+        </button>
+        )
+      })}
+    </div>
+
+    {/* tab content area */}
+    <div className="">
+      {tabs.find((tab) => tab.id ===activeTab)?.component}
+    </div>
+    </div>
+  );
+}

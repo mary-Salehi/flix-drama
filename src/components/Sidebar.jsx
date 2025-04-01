@@ -82,18 +82,6 @@ function Sidebar() {
                   }
                 >
                   {({ isActive }) => (
-                    // isActive &&  (
-                    //   <img
-                    //     key="icon"
-                    //     src={link.icon}
-                    //     alt=""
-                    //     className="w-6 h-6"
-                    //   />
-                    // ),
-                    // <span key="text" className="text">
-                    //   {link.name}
-                    // </span>,
-
                     <>
                       {isActive && (
                         <div className="flex">
@@ -112,7 +100,7 @@ function Sidebar() {
               <div className="space-y-2 dark:text-white text-[#575459]">
                 <button
                   onClick={() => setIsOpenSearchModal(true)}
-                  className="p-4 flex gap-x-2 w-full dark:bg-primary-1-dark bg-secondary-light rounded-xl cursor-pointer"
+                  className="p-4 flex items-center gap-x-2 w-full dark:bg-primary-1-dark bg-[#fbfbfb] rounded-xl cursor-pointer"
                 >
                   <img
                     className="w-7 h-7"
@@ -127,7 +115,7 @@ function Sidebar() {
                 </button>
                 <button
                   onClick={toggleTheme}
-                  className="p-4 flex gap-x-2 w-full dark:bg-primary-1-dark bg-secondary-light rounded-xl cursor-pointer"
+                  className="p-4 flex items-center gap-x-2 w-full dark:bg-primary-1-dark bg-[#fbfbfb] rounded-xl cursor-pointer"
                 >
                   <img
                     className="w-7 h-7"
