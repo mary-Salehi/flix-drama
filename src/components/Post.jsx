@@ -4,6 +4,9 @@ import DescriptionTab from "./PostTabs/DescriptionTab";
 import DownloadTab from "./PostTabs/DownloadTab";
 import CastAndCrewTab from "./PostTabs/CastAndCrewTab";
 import CommentsTab from "./PostTabs/CommentsTab";
+import PostDetails from "./Post/PostDetails";
+import TabbedInterface from "./Post/TabbedInterface";
+import PostImage from "./Post/PostImage";
 
 function Post() {
   const params = useParams();
@@ -11,32 +14,13 @@ function Post() {
   return (
     <div className="min-h-screen">
       <div className="relative flex flex-col items-center">
-        <div className="w-full [mask-image:linear-gradient(to_top,transparent_0%,white)] dark:[mask-image:linear-gradient(to_top,transparent_0%,yellow-70%)]">
-          <img
-            className="h-[240px] w-full object-cover"
-            src="https://uploadcenter.flix3drama.com/images/posters/d86Hza17AA.webp"
-            alt="drama-img"
-          />
-          <div className="absolute inset-0 bg-gradient-to-b dark:from-primary-2-dark opacity-0"></div>
-        </div>
-
+        <PostImage/>
         <div className="w-full relative -top-32 lg:-top-20 flex flex-col lg:flex-row items-center  gap-8 px-8 pt-5">
-          <div className="w-[210px] shrink-0 space-y-5">
-            <div className="overflow-hidden">
-              <img
-                className="w-[210px] h-[330px] object-cover rounded-3xl"
-                src="https://uploadcenter.flix3drama.com/images/posters/Z6WJk955V8.webp"
-                alt="drama-img"
-              />
-            </div>
-            <button className="bg-yellow-primary text-white py-3 rounded-xl font-bold w-full">
-              مشخصات کامل پست
-            </button>
-          </div>
+          <PostDetails/>
           <div className="w-full flex flex-col gap-8 lg:pt-10">
             <div className="flex items-center justify-between">
               <div>
-                <span className="text-2xl md:text-xl font-bold dark:text-white">
+                <span className="md:text-2xl text-xl font-bold dark:text-white">
                   دشمن عزیز من
                 </span>
                 <p className="text-[#9E9E9E] text-lg">My Dearest Nemesis</p>
@@ -80,8 +64,8 @@ function Post() {
                 </button>
               </div>
             </div>
-            <div className="text-xs lg:text-base flex justify-between">
-              <div className=" flex gap-2 lg:gap-8">
+            <div className="text-xs font-semibold md:text-sm lg:text-base flex justify-between">
+              <div className=" flex gap-2 md:gap-5 lg:gap-8">
                 <div className="flex flex-col justify-between items-center gap-y-5">
                   <span className="font-bold text-center text-[#787878] dark:text-[#C7C7C7]">
                     سال تولید
@@ -139,7 +123,7 @@ function Post() {
                   اکشن
                 </div>
               </div>
-              <div className="flex flex-col gap-2">
+              <div className="text-sm  flex flex-col gap-2">
                 <div className="px-4 py-3 rounded-lg text-[#047F87] bg-[#00ADB8]/10 font-semibold">
                   زیرنویس فارسی قسمت 8 اضافه شد
                 </div>
@@ -151,59 +135,10 @@ function Post() {
           </div>
         </div>
       </div>
-      <TabbedInterface/>
+      <TabbedInterface />
     </div>
   );
 }
+
 
 export default Post;
-
-const tabs = [
-  {
-    id: "description",
-    name: "توضیحات",
-    component: <DescriptionTab />,
-  },
-  {
-    id: "download",
-    name: "دانلود",
-    component: <DownloadTab />,
-  },
-  {
-    id: "cast",
-    name: "عوامل",
-    component: <CastAndCrewTab />,
-  },
-  {
-    id: "comments",
-    name: "نظرات",
-    component: <CommentsTab />,
-  },
-];
-
-function TabbedInterface() {
-  const [activeTab, setActiveTab] = useState(tabs[0].id);
-
-  return (
-    <div>
-      <div className="flex items-center justify-center border-b border-gray-200 dark:border-[#24152E]">
-      {tabs.map((tab) => {
-        return (
-          <button
-          key={tab.id}
-          onClick={() => setActiveTab(tab.id)}
-          className={`px-2 py-3 dark:text-white text-[#24152E] font-semibold whitespace-nowrap cursor-pointer box-border ${activeTab === tab.id ? 'font-black border-b-4 border-purple-btn pb-2' : 'pb-3'}`}
-        >
-          {tab.name}
-        </button>
-        )
-      })}
-    </div>
-
-    {/* tab content area */}
-    <div className="">
-      {tabs.find((tab) => tab.id ===activeTab)?.component}
-    </div>
-    </div>
-  );
-}

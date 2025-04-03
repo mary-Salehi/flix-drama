@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 function VerticalSwiper() {
   return (
-    <div className="flex flex-col mx-auto w-[430px] h-[380px]">
+    <div className="flex flex-col mx-auto w-full max-w-[430px] h-[380px]">
       <div className="flex justify-between gap-4 mb-4 dark:text-white">
         <div className="font-extrabold">پست های مشابه</div>
         <div className="flex gap-1">
@@ -56,7 +56,7 @@ function VerticalSwiper() {
       >
         {[1, 2, 3, 4, 5, 6].map((item) => (
           <SwiperSlide key={item}>
-            <div className="flex items-center justify-center !h-[95px] flex-grow-0 rounded-[20px] bg-[#FFFFFF] dark:bg-[#24152E] mx-4 border border-gray-100 dark:border-0 overflow-hidden">
+            <div className="flex items-center justify-center text-sm !h-[95px] flex-grow-0 rounded-[20px] bg-[#FFFFFF] dark:bg-[#24152E] mx-4 border border-gray-100 dark:border-0 overflow-hidden">
               <img className="h-full w-[90px] object-cover" src="https://uploadcenter.flix3drama.com/images/posters/ATDmXuiTfh.webp" alt="again 18" />
               <div className="flex justify-between items-center sm:text-sm w-full gap-1 px-5">
                 <div>
