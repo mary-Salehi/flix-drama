@@ -1,9 +1,15 @@
 import React from "react";
 import { useState } from "react";
 import Dramas from "../components/Dramas";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/navigation";
+import { Anime } from "../components/Swiper/HomePageSwiper";
 
 function Posts() {
+  const location = useLocation();
+  const { items, title } = location.state || { items: [], title: "" };
   const [sliderValue, setSliderValue] = useState(50);
 
   const handleSliderChange = (e) => {
@@ -194,11 +200,7 @@ function Posts() {
                     </label>
                   </div>
                   <div>
-                    <input
-                      type="checkbox"
-                      id="drama"
-                      className="peer hidden"
-                    />
+                    <input type="checkbox" id="drama" className="peer hidden" />
                     <label
                       htmlFor="drama"
                       className="px-4 py-2 bg-[#EBEBEB] dark:bg-primary-1-dark rounded-xl dark:text-white peer-checked:bg-purple-btn peer-checked:text-white cursor-pointer"
@@ -302,7 +304,7 @@ function Posts() {
         </div>
       </div>
 
-      <div className="w-full p-4">
+      <div className="w-full p-4 bg-green-200">
         <div className="w-full flex justify-center gap-2 mb-5">
           <Link className="w-full">
             <div className="h-[136px] w-full rounded-3xl overflow-hidden relative">
@@ -352,8 +354,18 @@ function Posts() {
             </div>
           </Link>
         </div>
-        <div className="px-5">
-          <Dramas page="posts" />
+
+        <div className="px-5 bg-red-200 h-[400px]">
+          <Swiper
+            spaceBetween={0}
+            className="flex bg-yellow-200"
+          >
+            {items.map((anime) => (
+              <SwiperSlide key={anime.mal_id} className="bg-blue-300 h-[300px]">
+                <Anime anime={anime} page="home" />
+              </SwiperSlide>
+            ))}
+          </Swiper>
         </div>
       </div>
     </div>

@@ -1,10 +1,11 @@
-
 import { Route, Routes } from "react-router-dom";
 import Layout from "./Layout";
 import Home from "../pages/Home";
 import Posts from "../pages/Posts";
 import Post from "./Post";
 import Actors from "../pages/Actors";
+import PostsLayout from "./PostsLayouts/PostsLayout";
+import MainPosts from "./PostsLayouts/MainPosts";
 
 const sidebarLinks = [
   {
@@ -43,14 +44,22 @@ function MainComponent() {
   return (
     <main className="bg-background-light dark:bg-background-dark min-h-lvh">
       <Routes>
-        <Route path="/" element={<Layout/>}>
-          <Route index element={<Home/>}/>
-          <Route path="/posts/:name" element={<Post/>}/>
-          <Route path="posts" element={<Posts/>}/>
-          <Route path="actors" element={<Actors/>}/>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Home />} />
+          <Route path="posts" element={<PostsLayout/>}>
+            <Route index element={<MainPosts/>}/>
+            <Route path=":category" element={<MainPosts/>}/>
+          </Route>
+          <Route path="/post" element={<Post/>}/>
+          {/* <Route path="posts" element={<Posts />}>
+            <Route index element={<Posts />} />
+            <Route path="posts" element={<Posts />} />
+          </Route>
+          <Route path="/posts/:category" element={<Posts/>}/> */}
+          <Route path="actors" element={<Actors />} />
         </Route>
       </Routes>
-    </main> 
+    </main>
   );
 }
 

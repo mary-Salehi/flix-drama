@@ -1,8 +1,21 @@
-import { Link } from "react-router-dom";
-import useFetch, { API_BASE } from "../hooks/useFetch";
+import { useState, useEffect } from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation } from "swiper/modules";
+import { Link, useNavigate } from "react-router-dom";
+import "swiper/css";
+import "swiper/css/navigation";
+import useFetch, { API_BASE } from "../../hooks/useFetch";
+import Posts from "../../pages/Posts";
+import { Scrollbar } from "swiper/modules";
+import "swiper/css/scrollbar";
 
-function Dramas({ page }) {
-  const {isLoading, data} = useFetch(`${API_BASE}/anime`,'')
+function HomePageAnimeSwiper({ page, category, title, endpoint }) {
+  const navigate = useNavigate();
+  const { isLoading, data, error } = useFetch(endpoint, "");
+
+  const sliderItems = data.slice(0, 6) || [];
+  const allItems = data || [];
+
   const getClasses = () => {
     switch (page) {
       case "home":
@@ -11,27 +24,64 @@ function Dramas({ page }) {
         return "flex flex-col gap-y-7";
     }
   };
+
+  console.log(category);
+  
+  const handleNavigate = () => {
+    navigate(`posts/${category}`)
+  }
+
+  if (error) return <div className="dark:text-white">{error.message}</div>;
+
+  if (isLoading)
+    return <div className="text-center py-8 dark:text-white">Loading...</div>;
+
   return (
-    <div className={`${getClasses()}`}>
-      {data.map((anime) => {
-        return <Drama anime={anime} key={anime.mal_id} page={page} />;
-      })}
+    <div className={`${getClasses()} flex flex-col`}>
+      <div className="flex items-center justify-between mb-10">
+        <h2 className="font-bold text-lg dark:text-white">{title}</h2>
+        <button
+          className="text-sm text-[#5F5F5F] dark:text-white font-semibold"
+          // to={`posts/${category}`}
+          state={{ items: allItems, title }}
+          onClick={handleNavigate}
+        >
+          مشاهده
+        </button>
+      </div>
+      <Swiper
+        modules={Scrollbar}
+        slidesPerView={"auto"}
+        spaceBetween={30}
+        scrollbar={{ draggable: true }}
+        className="w-full flex"
+      >
+        {sliderItems.map((anime) => (
+          <SwiperSlide
+            key={anime.mal_id}
+            className="!h-auto !w-auto"
+          >
+            <div className="h-full">
+              <Anime anime={anime} page="home" />
+            </div>
+          </SwiperSlide>
+        ))}
+      </Swiper>
     </div>
   );
 }
 
-export default Dramas;
+export default HomePageAnimeSwiper;
 
-export function Drama({ anime, page ,isLoading}) {
-  
+export function Anime({ anime, page, isLoading }) {
   return (
     <div
-      className={`flex flex-col sm:flex-row justify-between p-3 shrink-0  bg-white dark:bg-[#24152E] rounded-3xl ${
+      className={`h-full flex flex-col sm:flex-row justify-between p-3 bg-white dark:bg-[#24152E] rounded-3xl ${
         page === "posts" ? "w-full gap-x-8" : "w-[330px] sm:w-[420px]"
       } `}
     >
       <div className="flex items-center gap-x-4 mb-2 sm:mb-0 w-full">
-        <div className="w-[94px] h-[138px]">
+        <div className="!w-[100px] h-full">
           {isLoading ? (
             <div className="w-full h-full rounded-xl flex items-center justify-center bg-purple-950 text-white text-xs">
               loading image
@@ -45,11 +95,15 @@ export function Drama({ anime, page ,isLoading}) {
           )}
         </div>
         <div
-          className={`space-y-3 text-xs font-semibold ${
+          className={`flex flex-col gap-y-3  text-xs font-semibold ${
             page === "posts" ? "w-full" : ""
           }`}
         >
-          <h3 className="text-lg font-bold dark:text-white">{anime.title}</h3>
+          <div className={`min-h-[56px] min-w-0 ${page === 'home' ? ' max-w-[170px]' : ''} flex flex-col justify-center`}>
+            <h3 className={`text-lg font-bold dark:text-white text-wrap break-words min-w-0 ${page === 'home' ? 'truncate line-clamp-2' : ''}`}>
+              {anime.title}
+            </h3>
+          </div>
           <div className="w-full px-2 py-[6px] inline-block  dark:text-[#00FFFF] text-[#057E7E] bg-[#d6f8f2] dark:bg-[#1a2b2b] rounded-lg">
             زیرنویس قسمت {anime.latestSubtitle} اضافه شد
           </div>
@@ -83,7 +137,7 @@ export function Drama({ anime, page ,isLoading}) {
       </div>
       <div className="flex sm:flex-col-reverse items-center sm:items-end justify-between min-w-fit">
         <Link
-          to="/posts/my-dear-nemesis"
+          to="post"
           className="px-5 py-3 text-xs font-bold bg-[#F9F0FF] dark:bg-[#100617] dark:text-white rounded-xl cursor-pointer"
         >
           تماشاو دانلود
