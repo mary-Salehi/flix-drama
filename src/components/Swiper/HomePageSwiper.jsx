@@ -1,20 +1,25 @@
 import { useState, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import "swiper/css";
 import "swiper/css/navigation";
 import useFetch, { API_BASE } from "../../hooks/useFetch";
 import Posts from "../../pages/Posts";
-import { Scrollbar } from "swiper/modules";
 import "swiper/css/scrollbar";
+import { all } from "axios";
 
 function HomePageAnimeSwiper({ page, category, title, endpoint }) {
+
+  
   const navigate = useNavigate();
-  const { isLoading, data, error } = useFetch(endpoint, "");
+  const { isLoading, data, error } = useFetch(endpoint);
 
   const sliderItems = data.slice(0, 6) || [];
   const allItems = data || [];
+
+  console.log(data);
+  
 
   const getClasses = () => {
     switch (page) {
@@ -24,8 +29,6 @@ function HomePageAnimeSwiper({ page, category, title, endpoint }) {
         return "flex flex-col gap-y-7";
     }
   };
-
-  console.log(category);
   
   const handleNavigate = () => {
     navigate(`posts/${category}`)
@@ -41,7 +44,7 @@ function HomePageAnimeSwiper({ page, category, title, endpoint }) {
       <div className="flex items-center justify-between mb-10">
         <h2 className="font-bold text-lg dark:text-white">{title}</h2>
         <button
-          className="text-sm text-[#5F5F5F] dark:text-white font-semibold"
+          className="text-sm text-[#5F5F5F] dark:text-white font-semibold cursor-pointer"
           // to={`posts/${category}`}
           state={{ items: allItems, title }}
           onClick={handleNavigate}
@@ -50,10 +53,8 @@ function HomePageAnimeSwiper({ page, category, title, endpoint }) {
         </button>
       </div>
       <Swiper
-        modules={Scrollbar}
         slidesPerView={"auto"}
         spaceBetween={30}
-        scrollbar={{ draggable: true }}
         className="w-full flex"
       >
         {sliderItems.map((anime) => (
@@ -137,7 +138,7 @@ export function Anime({ anime, page, isLoading }) {
       </div>
       <div className="flex sm:flex-col-reverse items-center sm:items-end justify-between min-w-fit">
         <Link
-          to="post"
+          to={`${location.pathname === '/'? 'posts/post' : 'post'}`}
           className="px-5 py-3 text-xs font-bold bg-[#F9F0FF] dark:bg-[#100617] dark:text-white rounded-xl cursor-pointer"
         >
           تماشاو دانلود
@@ -147,7 +148,7 @@ export function Anime({ anime, page, isLoading }) {
             page === "home" ? "text-white" : "text-black"
           }`}
         >
-          {anime.score}
+          {anime.score || anime.rank}
         </span>
       </div>
     </div>

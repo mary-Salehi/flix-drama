@@ -50,12 +50,7 @@ function MainComponent() {
             <Route index element={<MainPosts/>}/>
             <Route path=":category" element={<MainPosts/>}/>
           </Route>
-          <Route path="/post" element={<Post/>}/>
-          {/* <Route path="posts" element={<Posts />}>
-            <Route index element={<Posts />} />
-            <Route path="posts" element={<Posts />} />
-          </Route>
-          <Route path="/posts/:category" element={<Posts/>}/> */}
+          <Route path="/posts/post" element={<Post/>}/>
           <Route path="actors" element={<Actors />} />
         </Route>
       </Routes>

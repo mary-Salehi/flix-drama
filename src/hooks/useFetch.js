@@ -25,7 +25,10 @@ export default function useFetch(url, query = "") {
     async function fetchData() {
       try {
         setIsLoading(true);
-        const response = await axios.get(`${url}?${query}`, {
+
+        const fullUrl = query ? `${url}${url.includes('?') ? '&' : '?'}${query}`
+        : url;
+        const response = await axios.get(fullUrl, {
           signal: abortController.signal
         });
         const apiData = response.data;

@@ -10,7 +10,8 @@ import PostImage from "./Post/PostImage";
 
 function Post() {
   const params = useParams();
-
+  console.log(params);
+  
   return (
     <div className="min-h-screen">
       <div className="relative flex flex-col items-center">

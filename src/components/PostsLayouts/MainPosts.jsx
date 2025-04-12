@@ -19,7 +19,6 @@ function MainPosts() {
     pagination,
   } = useFetch(`${API_BASE}/top/anime`, `filter=${category || ''}&page=${page}&limit=${itemsPerPage}`);
 
-  console.log(category , 'mainposts');
   
   useEffect(() => {
     if(pagination){
@@ -41,33 +40,9 @@ function MainPosts() {
     }
   };
 
-  console.log(category);
-  
-
-  // const itemsPerPage = 10;
-  // const {
-  //   isLoading,
-  //   data: animeList,
-  //   error,
-  //   pagination,
-  // } = useFetch(`${API_BASE}/top/anime`, `page=${page}&limit=${itemsPerPage}`);
-
-  // const {
-  //   currentPage: page,
-  //   totalPages,
-  //   isChangingPage,
-  //   pageRange,
-  //   changePage: handlePageChange,
-  // } = usePagination(pagination?.items?.total || 0, itemsPerPage);
-
-
-  // const handlePageSelect = (e) => {
-  //   handlePageChange(parseInt(e.target.value));
-  // };
-
-  if (isLoading && animeList.length === 0) {
+  if (isLoading) {
     return (
-      <div className="flex justify-center items-center h-64">isLoading...</div>
+      <div className="flex justify-center items-center h-full dark:text-white">Loading data...</div>
     );
   }
 
