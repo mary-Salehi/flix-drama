@@ -5,9 +5,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import "swiper/css";
 import "swiper/css/navigation";
 import useFetch, { API_BASE } from "../../hooks/useFetch";
-import Posts from "../../pages/Posts";
 import "swiper/css/scrollbar";
-import { all } from "axios";
 
 function HomePageAnimeSwiper({ page, category, title, endpoint }) {
 
