@@ -12,7 +12,7 @@ function PostsPlaylist() {
           />
           <div className="w-full h-full absolute top-0 opacity-80 bg-gradient-to-r from-purple-800 to-blue-400"></div>
           <div className="flex items-center justify-center absolute top-1/2 -translate-y-1/2 w-full">
-            <span className="inline-block w-1/2 text-center text-white font-black text-wrap text-sm">
+            <span className="inline-block w-2/3 text-center text-white font-black text-wrap text-sm lg:text-base">
               جدیدترین سریال های کره ای
             </span>
           </div>
@@ -28,7 +28,7 @@ function PostsPlaylist() {
           />
           <div className="w-full h-full absolute top-0 opacity-80 bg-gradient-to-r from-orange-500 to-amber-300"></div>
           <div className="flex items-center justify-center absolute top-1/2 -translate-y-1/2 w-full">
-            <span className="inline-block w-1/2 text-center text-white font-black text-wrap text-sm">
+            <span className="inline-block w-2/3 text-center text-white font-black text-wrap text-sm lg:text-base">
               جدیدترین سریال های چینی
             </span>
           </div>
@@ -44,7 +44,7 @@ function PostsPlaylist() {
           />
           <div className="w-full h-full absolute top-0 opacity-80 bg-gradient-to-r from-pink-600 to-purple-600"></div>
           <div className="flex items-center justify-center absolute top-1/2 -translate-y-1/2 w-full">
-            <span className="inline-block w-1/2 text-center text-white font-black text-wrap text-sm">
+            <span className="inline-block w-2/3 text-center text-white font-black text-wrap text-sm lg:text-base">
               جدیدترین فیلم های کره ای
             </span>
           </div>

@@ -5,7 +5,7 @@ import PostsPlaylist from "./PostsPlaylist";
 
 function PostsLayout() {
   return (
-    <div className="w-full flex flex-col lg:flex-row lg:items-start bg-red-300 gap-4 px-5 pt-10">
+    <div className="w-full flex flex-col lg:flex-row lg:items-start gap-6">
       <PostsFilter/>
       <div className="w-full">
         <PostsPlaylist/>
