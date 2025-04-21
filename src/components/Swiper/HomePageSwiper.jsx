@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, replace, useLocation, useNavigate } from "react-router-dom";
 import "swiper/css";
 import "swiper/css/navigation";
 import useFetch, { API_BASE } from "../../hooks/useFetch";
 import "swiper/css/scrollbar";
+import Post from "../Post";
 
 function HomePageAnimeSwiper({ page, category, title, endpoint }) {
 
@@ -15,9 +16,6 @@ function HomePageAnimeSwiper({ page, category, title, endpoint }) {
 
   const sliderItems = data.slice(0, 6) || [];
   const allItems = data || [];
-
-  console.log(data);
-  
 
   const getClasses = () => {
     switch (page) {
@@ -100,7 +98,7 @@ export function Anime({ anime, page, isLoading }) {
         >
           <div className={`min-h-[56px] min-w-0 ${page === 'home' ? ' max-w-[170px]' : ''} flex flex-col justify-center`}>
             <h3 className={`text-lg font-bold dark:text-white text-wrap break-words min-w-0 ${page === 'home' ? 'truncate line-clamp-2' : ''}`}>
-              {anime.title}
+              {anime.title_english || anime.title}
             </h3>
           </div>
           <div className="w-full px-2 py-[6px] inline-block  dark:text-[#00FFFF] text-[#057E7E] bg-[#d6f8f2] dark:bg-[#1a2b2b] rounded-lg">
@@ -136,7 +134,8 @@ export function Anime({ anime, page, isLoading }) {
       </div>
       <div className="flex sm:flex-col-reverse items-center sm:items-end justify-between min-w-fit">
         <Link
-          to={`${location.pathname === '/'? 'posts/post' : 'post'}`}
+          to={`/post/${encodeURIComponent(anime.title)}`}
+          state={{mal_id: anime.mal_id}}
           className="px-5 py-3 text-xs font-bold bg-[#F9F0FF] dark:bg-[#100617] dark:text-white rounded-xl cursor-pointer"
         >
           تماشاو دانلود

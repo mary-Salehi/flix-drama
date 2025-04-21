@@ -72,6 +72,7 @@ function Sidebar() {
               <li key={link.id}>
                 <NavLink
                   to={link.path}
+                  end
                   onClick={isOpenSidebar ? toggleSidebar : undefined}
                   className={({ isActive }) =>
                     `relative flex items-center gap-x-5 py-5 px-7 cursor-pointer ${

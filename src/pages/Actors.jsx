@@ -2,28 +2,6 @@ import { Link } from "react-router-dom";
 import useFetch, { API_BASE } from "../hooks/useFetch";
 import { useState } from "react";
 
-// const actors = [
-//   {
-//     id: 1,
-//     name: "Ji Chang Wook",
-//     imageUrl: "https://uploadcenter.flix3drama.com/images/actors/ZyyEJ_5f.webp",
-//   },
-//   {
-//     id: 2,
-//     name: "Song Joong Ki",
-//     imageUrl: "https://uploadcenter.flix3drama.com/images/actors/1kymd_5f.webp",
-//   },
-//   {
-//     id: 3,
-//     name: "Lee Ji Eun",
-//     imageUrl: "https://uploadcenter.flix3drama.com/images/actors/vK4lp_5f.webp",
-//   },
-//   {
-//     id: 4,
-//     name: "Park Bo Gum",
-//     imageUrl: "https://uploadcenter.flix3drama.com/images/actors/p3Qx8_5f.webp",
-//   },
-// ];
 function Actors() {
   const [page, setPage] = useState(1);
   const [hasNextPage, setHasNextPage] = useState(true);
@@ -35,7 +13,6 @@ function Actors() {
     pagination,
     error,
   } = useFetch(`${API_BASE}/characters`, `page=${page}&limit=10`);
-  console.log(characters);
 
   return (
     <div className="flex flex-wrap justify-center gap-4">

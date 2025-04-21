@@ -14,7 +14,7 @@ const getBestImageUrl = (anime) => {
 }
 
 export default function useFetch(url, query = "") {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState([]); //instead of []
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [pagination, setPagination] = useState(null)
@@ -34,15 +34,40 @@ export default function useFetch(url, query = "") {
         const apiData = response.data;
         
         //optimizing images
-        const optimizedData = apiData.data?.map((anime) => ({
-          ...anime,
-          images: {
-            ...anime.images,
-            optimized_url: getBestImageUrl(anime)
-          }
-        })) || []
+        // const optimizedData = apiData.data?.map((anime) => ({
+        //   ...anime,
+        //   images: {
+        //     ...anime.images,
+        //     optimized_url: getBestImageUrl(anime)
+        //   }
+        // })) || []
         
-        setData(optimizedData);
+        // setData(optimizedData);
+        // console.log(data);
+
+        // Handle single item vs array responses differently
+        if (Array.isArray(apiData.data)) {
+          // For endpoints that return arrays
+          const optimizedData = apiData.data.map((anime) => ({
+            ...anime,
+            images: {
+              ...anime.images,
+              optimized_url: getBestImageUrl(anime)
+            }
+          }));
+          setData(optimizedData);
+        } else {
+          // For endpoints that return single objects
+          const optimizedItem = apiData.data ? {
+            ...apiData.data,
+            images: {
+              ...apiData.data.images,
+              optimized_url: getBestImageUrl(apiData.data)
+            }
+          } : null;
+          setData(optimizedItem);
+        }
+        
         
         // Store pagination data if available
         if (apiData.pagination) {

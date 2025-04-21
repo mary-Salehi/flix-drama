@@ -83,7 +83,7 @@ export function Drama({ anime, page ,isLoading}) {
       </div>
       <div className="flex sm:flex-col-reverse items-center sm:items-end justify-between min-w-fit">
         <Link
-          to="/posts/my-dear-nemesis"
+          to={`/posts/${anime.mal_id}`}
           className="px-5 py-3 text-xs font-bold bg-[#F9F0FF] dark:bg-[#100617] dark:text-white rounded-xl cursor-pointer"
         >
           تماشاو دانلود

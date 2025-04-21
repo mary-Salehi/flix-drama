@@ -6,6 +6,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/effect-fade";
 import useFetch, { API_BASE } from "../hooks/useFetch";
+import { Link } from "react-router-dom";
 
 function HeaderSwiper() {
   // const slides = [
@@ -75,9 +76,9 @@ function HeaderSwiper() {
                 </h2>
                 <p className="text-xl sm:text-lg">{slide.title_japanese}</p>
                 <button className="bg-white rounded-xl px-4 py-2 hover:bg-opacity-90 transition">
-                  <a className="text-[#451169] font-semibold" href="#">
+                  <Link to={`/post/${encodeURIComponent(slide.title)}`} state={{mal_id: slide.mal_id}} className="text-[#451169] font-semibold" href="#">
                     دانلود و پخش آنلاین
-                  </a>
+                  </Link>
                 </button>
               </div>
             </div>

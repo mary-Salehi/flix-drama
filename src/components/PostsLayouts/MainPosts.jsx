@@ -11,6 +11,8 @@ function MainPosts() {
   const [page, setPage] = useState(1);
   const [hasNextPage, setHasNextPage] = useState(true);
   const itemsPerPage = 10;
+  console.log(category);
+  
   
   const {
     isLoading,

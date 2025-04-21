@@ -12,7 +12,9 @@ function Layout() {
     window.scrollTo(0,0)
   } , [location])
 
-  console.log(location.pathname)
+  const isSinglePost = location.pathname.startsWith('/post/');
+  const isPostsSection = location.pathname.startsWith('/posts/') && !isSinglePost;
+
   return (
     <main className="bg-background-light dark:bg-background-dark min-h-lvh max-w-[1440px] mx-auto">
       <SearchModal/>
@@ -20,7 +22,7 @@ function Layout() {
       <div className="flex">
         {/* sidebar */}
         <Sidebar />
-        <div id="components" className={`min-w-0 ${location.pathname.startsWith('/posts/') ? 'p-0 pb-10 pt-[76px] lg:pt-0' : 'px-5 py-10 pt-[116px] lg:pt-10'} w-full`}>
+        <div id="components" className={`min-w-0 ${isSinglePost ? 'p-0 pb-10 pt-[76px] lg:pt-0' : 'px-5 py-10 pt-[116px] lg:pt-10'} w-full`}>
           <Outlet/>
           <Footer />
         </div>
