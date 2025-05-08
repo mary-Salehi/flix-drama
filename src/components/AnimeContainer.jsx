@@ -1,7 +1,7 @@
-import Dramas, { Drama } from "./Dramas";
+
 import HomePageAnimeSwiper from "./Swiper/HomePageSwiper";
 
-const dramasCategory = [
+const animeCategory = [
   {
     category: 'airing',
     title: 'top airing',
@@ -34,14 +34,14 @@ const dramasCategory = [
   // }
 ];
 
-function DramasContainer() {
+function AnimeContainer() {
   return (
     <div className="space-y-10">
-      {dramasCategory.map((category) => (
+      {animeCategory.map((category) => (
         <HomePageAnimeSwiper key={category.category} category={category.category} title={category.title} endpoint={category.endpoint} query={category.query}/>
       ))}
     </div>
   );
 }
 
-export default DramasContainer;
+export default AnimeContainer;

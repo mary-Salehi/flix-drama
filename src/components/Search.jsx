@@ -1,11 +1,13 @@
 import { useState } from "react";
+import useFetch from "../hooks/useFetch";
+import { Link } from "react-router-dom";
 
 function Search() {
-  const [searchTerm , setSearchTerm] = useState('');
+  const [searchQuery, setSearchQuery] = useState("");
 
   const handleClear = () => {
-    setSearchTerm('')
-  }
+    setSearchQuery("");
+  };
 
   return (
     <div className="my-14">
@@ -56,16 +58,28 @@ function Search() {
           <input
             className="w-full focus:outline-0 placeholder:text-[#939191] dark:text-white"
             type="text"
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="اسم فیلم یا سریال مد نظر خود را وارد کنید"
           />
         </div>
         <div className="flex shrink-0 items-center justify-center font-semibold sm:text-sm gap-x-4">
-          <button onClick={handleClear} className="text-[#737373] dark:text-white cursor-pointer">پاک کردن</button>
-          <button className="bg-[#9600FF] px-5 py-3 rounded-xl text-white cursor-pointer">
-            جست و جو
+          <button
+            onClick={handleClear}
+            className="text-[#737373] dark:text-white cursor-pointer"
+          >
+            پاک کردن
           </button>
+          <Link
+            to={
+              { 
+                pathname: "/posts",
+                search: `?query=${encodeURIComponent(searchQuery)}` 
+              }}
+            className="bg-[#9600FF] px-5 py-3 rounded-xl text-white cursor-pointer"
+          >
+            جست و جو
+          </Link>
         </div>
       </div>
       <div className="hidden sm:block bg-[#EFE6F5] dark:bg-[#100617] w-11/12 mx-auto rounded-b-2xl p-3"></div>

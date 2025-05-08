@@ -32,18 +32,6 @@ export default function useFetch(url, query = "") {
           signal: abortController.signal
         });
         const apiData = response.data;
-        
-        //optimizing images
-        // const optimizedData = apiData.data?.map((anime) => ({
-        //   ...anime,
-        //   images: {
-        //     ...anime.images,
-        //     optimized_url: getBestImageUrl(anime)
-        //   }
-        // })) || []
-        
-        // setData(optimizedData);
-        // console.log(data);
 
         // Handle single item vs array responses differently
         if (Array.isArray(apiData.data)) {

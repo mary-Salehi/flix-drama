@@ -1,32 +1,63 @@
 import { useEffect, useState } from "react";
 import useFetch, { API_BASE } from "../../hooks/useFetch";
-
-import axios from "axios";
-import { Anime } from "../Swiper/HomePageSwiper";
-import usePagination from "../../hooks/usePagination";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams, useSearchParams } from "react-router-dom";
+import Anime from "../Anime";
 
 function MainPosts() {
-  let {category} = useParams();
-  const [page, setPage] = useState(1);
+  let { category } = useParams();
+  const [searchParams,setSearchParams] = useSearchParams();
+  const location = useLocation();
+
+  const searchQuery = searchParams.get("query");
+  const urlPage = parseInt(searchParams.get('page')) || 1;
+
+  const [page, setPage] = useState(urlPage);
   const [hasNextPage, setHasNextPage] = useState(true);
   const itemsPerPage = 10;
-  console.log(category);
-  
-  
-  const {
-    isLoading,
-    data: animeList,
-    error,
-    pagination,
-  } = useFetch(`${API_BASE}/top/anime`, `filter=${category || ''}&page=${page}&limit=${itemsPerPage}`);
 
-  
+  // Sync state with URL changes (including back/forward navigation)
   useEffect(() => {
-    if(pagination){
+    const currentPage = parseInt(searchParams.get('page')) || 1;
+    if (currentPage !== page) {
+      setPage(currentPage);
+    }
+  }, [location.search]); // Trigger when URL search params change
+
+  // Reset page to 1 when search query changes
+  useEffect(() => {
+    setPage(1);
+  }, [searchQuery]);
+  
+  // Update URL when page or query changes
+  useEffect(() => {
+    const params = new URLSearchParams();
+    if (searchQuery) params.set('query', searchQuery);
+    params.set('page', page.toString());
+    setSearchParams(params);
+  }, [page, searchQuery]);
+
+  console.log(searchQuery);
+
+  const apiUrl = searchQuery
+    ? `${API_BASE}/anime?q=${encodeURIComponent(
+        searchQuery
+      )}&page=${page}&limit=${itemsPerPage}`
+    : `${API_BASE}/top/anime?filter=${
+        category || ""
+      }&page=${page}&limit=${itemsPerPage}`;
+
+  console.log(apiUrl);
+  
+
+  const { isLoading, data: animeList, error, pagination } = useFetch(apiUrl);
+  console.log(apiUrl);
+  console.log(animeList);
+
+  useEffect(() => {
+    if (pagination) {
       setHasNextPage(pagination.has_next_page);
     }
-  } , [pagination])
+  }, [pagination]);
 
   const handleNextPage = () => {
     if (hasNextPage) {
@@ -44,20 +75,14 @@ function MainPosts() {
 
   if (isLoading) {
     return (
-      <div className="flex justify-center items-center h-full dark:text-white">Loading data...</div>
+      <div className="flex justify-center items-center h-full dark:text-white pt-5">
+        در حال بارگذاری...
+      </div>
     );
   }
 
   return (
     <div className="w-full relative flex flex-col gap-10">
-      {/* Loading overlay */}
-      {/* {isChangingPage && (
-        <div className="absolute inset-0 bg-black bg-opacity-10 flex justify-center items-center z-10">
-          <div className="bg-white p-4 rounded-md shadow-lg">
-            Loading page {page}...
-          </div>
-        </div>
-      )} */}
 
       <div className="flex flex-col gap-5 items-center">
         {animeList.map((anime) => (
@@ -65,7 +90,7 @@ function MainPosts() {
         ))}
       </div>
 
-        {/* pagination buttons */}
+      {/* pagination buttons */}
       <div className="flex justify-center items-center mt-8 gap-4">
         <div className="flex justify-center items-center mt-8 gap-4">
           <button
@@ -100,4 +125,3 @@ function MainPosts() {
 }
 
 export default MainPosts;
-

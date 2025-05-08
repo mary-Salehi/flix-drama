@@ -133,21 +133,21 @@ function Sidebar() {
                       : "روشن کردن تم سایت"}
                   </span>
                 </button>
-                <a className="user-account flex items-center gap-x-2 dark:bg-[#0F1020] bg-[#F2FDFD] p-4">
+                <div className="user-account flex items-center gap-x-2 dark:bg-[#0F1020] bg-[#F2FDFD] p-4">
                   <img
                     className="h-12 w-12"
                     src="https://flix3drama.com/_app/immutable/assets/user-octagon-e6035b1c.svg"
                     alt=""
                   />
-                  <div>
+                  <NavLink to={`/account/login`}>
                     <span className="text-base font-bold cursor-pointer dark:text-[#00FFFF] text-[#0F8D8D]">
                       کاربر مهمان
                     </span>
                     <p className="text-xs font-bold dark:text-[#0A8686] text-[#10D2D2] mt-1">
                       برای ثبت نام یا ورود کلیک کنید.
                     </p>
-                  </div>
-                </a>
+                  </NavLink>
+                </div>
               </div>
             </div>
           </ul>

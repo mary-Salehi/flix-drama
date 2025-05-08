@@ -2,11 +2,13 @@ import { Route, Routes, useLocation } from "react-router-dom";
 import Layout from "./Layout";
 import Home from "../pages/Home";
 import Posts from "../pages/Posts";
-import Post from "./Post";
+import Post from "./Post/Post";
 import Actors from "../pages/Actors";
 import PostsLayout from "./PostsLayouts/PostsLayout";
 import MainPosts from "./PostsLayouts/MainPosts";
 import { useEffect } from "react";
+import Login from "../pages/Account/Login";
+import Account from "../pages/Account/Account";
 
 const sidebarLinks = [
   {
@@ -57,6 +59,7 @@ function MainComponent() {
 
           <Route path="actors" element={<Actors />} />
         </Route>
+        <Route path="account/:page" element={<Account/>}/>
       </Routes>
     </main>
   );

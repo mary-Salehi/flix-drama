@@ -9,41 +9,15 @@ import useFetch, { API_BASE } from "../hooks/useFetch";
 import { Link } from "react-router-dom";
 
 function HeaderSwiper() {
-  // const slides = [
-  //   {
-  //     id: 1,
-  //     image:
-  //       "https://uploadcenter.flix3drama.com/images/slides/KT9hJmAAwn.webp",
-  //     title: "دشمن عزیز من",
-  //     subtitle: "My Dearest Nemesis",
-  //   },
-  //   {
-  //     id: 2,
-  //     image:
-  //       "https://uploadcenter.flix3drama.com/images/slides/bqENS5KrVQ.webp",
-  //     title: "وقتی زندگی به تو نارنگی می‌دهد",
-  //     subtitle: "When Life Gives You Tangarine",
-  //   },
-  //   {
-  //     id: 3,
-  //     image:
-  //       "https://uploadcenter.flix3drama.com/images/slides/Km3memqLSR.webp",
-  //     title: "دبیرستان مخفی",
-  //     subtitle: "Undercover Highschool",
-  //   },
-  //   {
-  //     id: 4,
-  //     image:
-  //       "https://uploadcenter.flix3drama.com/images/slides/nQs5X8gaYi.webp",
-  //     title: "قلب‌های مدفون",
-  //     subtitle: "Buried Hearts",
-  //   },
-  // ];
   
-  const {isLoading, data} = useFetch(`${API_BASE}/anime`,'')
+  const {isLoading, data , error} = useFetch(`${API_BASE}/anime`,'')
+  console.log('loading',isLoading);
+  
 
   return (
-    <div>
+    <div className="">
+      {isLoading && <div className="w-full min-h-full flex justify-center items-center pt-24 text-black/40 dark:text-white text-3xl font-bold">در حال بارگذاری...</div>}
+      {error && <div className="w-full min-h-full flex justify-center items-center pt-24 text-black/40 dark:text-white text-2xl font-bold">خطای بارگزاری اطلاعات</div>}
       <Swiper
         effect={"fade"}
         pagination={{
@@ -62,7 +36,6 @@ function HeaderSwiper() {
         {data.slice(8,12).map((slide) => (
           <SwiperSlide key={slide.mal_id}>
             <div className="relative h-full w-full">
-            {isLoading && <div className="w-full h-full flex items-center justify-center dark:text-white text-3xl font-bold">در حال بارگزاری</div>}
               <img
                 className="h-full w-full object-cover bg-gradient-to-r from-purple-400 to-purple-700"
                 src={slide.images.optimized_url}

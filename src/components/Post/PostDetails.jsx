@@ -102,23 +102,10 @@ function PostDetails({ data, isLoading }) {
             ژانر
           </div>
           {data?.genres?.map((genre) => (
-            <div className="bg-[#7C03D0] text-sm text-center text-white px-3 py-2 rounded-md font-bold">
+            <div key={genre.name} className="bg-[#7C03D0] text-sm text-center text-white px-3 py-2 rounded-md font-bold">
               {genre.name}
             </div>
           ))}
-          
-          {/* <div className="font-bold text-[#787878] dark:text-[#C7C7C7] ml-2">
-            ژانر
-          </div>
-          <div className="bg-[#7C03D0] text-sm text-center text-white px-3 py-2 rounded-md font-bold ">
-            عاشقانه
-          </div>
-          <div className="bg-[#E9485B] text-sm text-center text-white px-3 py-2 rounded-md font-bold ">
-            فانتزی
-          </div>
-          <div className="bg-[#1CA7F5] text-sm text-center text-white px-3 py-2 rounded-md font-bold ">
-            اکشن
-          </div> */}
         </div>
         <div className="text-sm  flex flex-col gap-2">
           <div className="px-4 py-3 rounded-lg text-[#047F87] bg-[#00ADB8]/10 font-semibold">

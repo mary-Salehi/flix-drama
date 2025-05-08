@@ -1,11 +1,11 @@
 import React from "react";
 import { useState } from "react";
-import Dramas from "../components/Dramas";
 import { Link, useLocation } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
-import { Anime } from "../components/Swiper/HomePageSwiper";
+import Anime from "../components/Anime";
+
 
 function Posts() {
   const location = useLocation();

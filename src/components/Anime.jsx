@@ -1,37 +1,15 @@
+import React from "react";
 import { Link } from "react-router-dom";
-import useFetch, { API_BASE } from "../hooks/useFetch";
 
-function Dramas({ page }) {
-  const {isLoading, data} = useFetch(`${API_BASE}/anime`,'')
-  const getClasses = () => {
-    switch (page) {
-      case "home":
-        return "flex gap-x-10 overflow-scroll bg-red-600";
-      case "posts":
-        return "flex flex-col gap-y-7";
-    }
-  };
-  return (
-    <div className={`${getClasses()}`}>
-      {data.map((anime) => {
-        return <Drama anime={anime} key={anime.mal_id} page={page} />;
-      })}
-    </div>
-  );
-}
-
-export default Dramas;
-
-export function Drama({ anime, page ,isLoading}) {
-  
+function Anime({ anime, page, isLoading }) {
   return (
     <div
-      className={`flex flex-col sm:flex-row justify-between p-3 shrink-0  bg-white dark:bg-[#24152E] rounded-3xl ${
+      className={`h-full flex flex-col sm:flex-row justify-between p-3 bg-white dark:bg-[#24152E] rounded-3xl ${
         page === "posts" ? "w-full gap-x-8" : "w-[330px] sm:w-[420px]"
       } `}
     >
       <div className="flex items-center gap-x-4 mb-2 sm:mb-0 w-full">
-        <div className="w-[94px] h-[138px]">
+        <div className="!w-[100px] h-full">
           {isLoading ? (
             <div className="w-full h-full rounded-xl flex items-center justify-center bg-purple-950 text-white text-xs">
               loading image
@@ -45,11 +23,23 @@ export function Drama({ anime, page ,isLoading}) {
           )}
         </div>
         <div
-          className={`space-y-3 text-xs font-semibold ${
+          className={`flex flex-col gap-y-3  text-xs font-semibold ${
             page === "posts" ? "w-full" : ""
           }`}
         >
-          <h3 className="text-lg font-bold dark:text-white">{anime.title}</h3>
+          <div
+            className={`min-h-[56px] min-w-0 ${
+              page === "home" ? " max-w-[170px]" : ""
+            } flex flex-col justify-center`}
+          >
+            <h3
+              className={`text-lg font-bold dark:text-white text-wrap break-words min-w-0 ${
+                page === "home" ? "truncate line-clamp-2" : ""
+              }`}
+            >
+              {anime.title_english || anime.title}
+            </h3>
+          </div>
           <div className="w-full px-2 py-[6px] inline-block  dark:text-[#00FFFF] text-[#057E7E] bg-[#d6f8f2] dark:bg-[#1a2b2b] rounded-lg">
             زیرنویس قسمت {anime.latestSubtitle} اضافه شد
           </div>
@@ -83,7 +73,8 @@ export function Drama({ anime, page ,isLoading}) {
       </div>
       <div className="flex sm:flex-col-reverse items-center sm:items-end justify-between min-w-fit">
         <Link
-          to={`/posts/${anime.mal_id}`}
+          to={`/post/${encodeURIComponent(anime.title)}`}
+          state={{ mal_id: anime.mal_id }}
           className="px-5 py-3 text-xs font-bold bg-[#F9F0FF] dark:bg-[#100617] dark:text-white rounded-xl cursor-pointer"
         >
           تماشاو دانلود
@@ -93,9 +84,11 @@ export function Drama({ anime, page ,isLoading}) {
             page === "home" ? "text-white" : "text-black"
           }`}
         >
-          {anime.score}
+          {anime.score || anime.rank || '-'}
         </span>
       </div>
     </div>
   );
 }
+
+export default Anime;

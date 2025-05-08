@@ -2,7 +2,7 @@ import React from 'react'
 
 function CommentsTab() {
   return (
-    <div>CommentsTab</div>
+    <div className='dark:text-white p-2'>no comments yet</div>
   )
 }
 

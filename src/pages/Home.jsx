@@ -1,14 +1,14 @@
 import React from "react";
 import HeaderSwiper from "../components/HeaderSwiper";
 import Search from "../components/Search";
-import DramasContainer from "../components/DramasContainer";
+import AnimeContainer from "../components/AnimeContainer";
 
 function Home() {
   return (
     <>
       <HeaderSwiper />
       <Search />
-      <DramasContainer />
+      <AnimeContainer />
     </>
   );
 }

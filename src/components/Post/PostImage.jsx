@@ -2,9 +2,9 @@ const flixpostimg =
   "https://uploadcenter.flix3drama.com/images/posters/d86Hza17AA.webp";
 
 function PostImage({ images, isLoading }) {
+  console.log(isLoading);
+  
   // if(isLoading) return <div className="w-full bg-gradient-to-r from-purple-400 to-purple-700">loading</div>
-  if (isLoading)
-    return <div className="bg-red-400 p-4 text-3xl text-sky-800">loading</div>;
   return (
     <div className="w-full [mask-image:linear-gradient(to_top,transparent_0%,white)] dark:[mask-image:linear-gradient(to_top,transparent_0%,yellow-70%)]">
       {isLoading ? (
