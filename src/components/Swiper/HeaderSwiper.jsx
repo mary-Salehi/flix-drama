@@ -5,8 +5,8 @@ import { Pagination, Autoplay, EffectFade } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/effect-fade";
-import useFetch, { API_BASE } from "../hooks/useFetch";
 import { Link } from "react-router-dom";
+import useFetch, { API_BASE } from "../../hooks/useFetch";
 
 function HeaderSwiper() {
   

@@ -8,7 +8,7 @@ import './assets/fonts/fonts.css';
 
 function App() {
   return (
-    <div dir="rtl">
+    <div >
       <Providers>
         <MainComponent />
       </Providers>

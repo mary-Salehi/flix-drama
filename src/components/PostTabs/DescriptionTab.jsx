@@ -1,5 +1,5 @@
 import React from "react";
-import VerticalSwiper from "../VerticalSwiper";
+import VerticalSwiper from "../Swiper/VerticalSwiper";
 
 function DescriptionTab() {
   return (

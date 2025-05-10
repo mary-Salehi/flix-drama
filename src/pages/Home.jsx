@@ -1,7 +1,7 @@
 import React from "react";
-import HeaderSwiper from "../components/HeaderSwiper";
-import Search from "../components/Search";
 import AnimeContainer from "../components/AnimeContainer";
+import HeaderSwiper from "../components/Swiper/HeaderSwiper";
+import Search from "../components/search/Search";
 
 function Home() {
   return (

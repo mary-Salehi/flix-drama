@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from "react";
-import { useSearchModal } from "../contexts/SearchModalContext";
-import { useTheme } from "../contexts/ThemeContext.";
-import useFetch from "../hooks/useFetch";
+import { useTheme } from "../../contexts/ThemeContext.";
 import { Link } from "react-router-dom";
+import { useSearchModal } from "../../contexts/SearchModalContext";
+import useFetch from "../../hooks/useFetch";
 
 function SearchModal() {
   const { theme } = useTheme();
@@ -22,8 +22,6 @@ function SearchModal() {
   let { data, isLoading, error } = useFetch(
     shouldFetch ? `https://api.jikan.moe/v4/anime?q=${searchQuery}` : null
   );
-
-  console.log("error is:  ", error);
 
   // Update search results when data changes
   useEffect(() => {
@@ -112,7 +110,7 @@ function SearchModal() {
               return (
                 <div
                   key={anime.mal_id}
-                  className="w-[380px] h-[95px] flex bg-white opacity-100 z-[80] rounded-xl overflow-hidden dark:bg-primary-1-dark shadow-md"
+                  className="w-full sm:max-w-[380px] h-[95px] flex bg-white opacity-100 z-[80] rounded-xl overflow-hidden dark:bg-primary-1-dark shadow-md"
                 >
                   <div className="h-full text-center text-white bg-purple-500 w-[96px]">
                     <img
@@ -142,21 +140,25 @@ function SearchModal() {
                 </div>
               );
             })}
-            <div className="mt-6">
-              <Link
-                to={{
-                  pathname: "/posts",
-                  search: `?query=${encodeURIComponent(searchQuery)}`,
-                  state: {
-                    searchResults: searchResults, // optional additional state
-                  },
-                }}
-                onClick={() => setIsOpenSearchModal(false)}
-                className="p-3 px-5 bg-black/50 dark:bg-black/70 rounded-xl text-sm text-white font-black"
-              >
-                مشاهده بیشتر
-              </Link>
-            </div>
+            {searchResults && searchResults.length === 0 ? (
+              <div className="dark:text-white">محتوا یافت نشد</div>
+            ) : (
+              <div className="mt-6">
+                <Link
+                  to={{
+                    pathname: "/posts",
+                    search: `?query=${encodeURIComponent(searchQuery)}`,
+                    state: {
+                      searchResults: searchResults, // optional additional state
+                    },
+                  }}
+                  onClick={() => setIsOpenSearchModal(false)}
+                  className="p-3 px-5 bg-black/50 dark:bg-black/70 rounded-xl text-sm text-white font-black"
+                >
+                  مشاهده بیشتر
+                </Link>
+              </div>
+            )}
           </div>
         )}
       </div>

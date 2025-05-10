@@ -21,8 +21,8 @@
 
 }
 
-@layer base {
-  html {
-    font-family: var(--font-family-sans);
-  }
+
+/* Base styles (replaces `@layer base`) */
+html {
+  font-family: 'Vazirmatn RD', sans-serif;
 }

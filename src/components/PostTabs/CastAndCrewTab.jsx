@@ -12,11 +12,11 @@ function CastAndCrewTab() {
   return (
     <div className='dark:text-white p-6'>
       <h1 className='dark:text-white text-xl font-bold mb-8'>actors</h1>
-      <div className='flex flex-wrap gap-6'>
+      <div className='flex flex-wrap justify-center sm:justify-start gap-6'>
         {data.map((item) => {
           return(
             <div key={item.character.mal_id} className='w-[140px] rounded-3xl overflow-hidden bg-white dark:bg-primary-1-dark'>
-              <div className='w-full h-[150px] flex items-center justify-center bg-red-200'>
+              <div className='w-full h-[150px] flex items-center justify-center bg-purple-800'>
                 <img src={item?.images?.optimized_url} alt="" />
                 {item?.images?.optimized_url && <UserCircleIcon className='w-20'/>}
               </div>
