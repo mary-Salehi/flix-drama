@@ -1,35 +1,42 @@
-import React from 'react'
-import useFetch from '../../hooks/useFetch';
-import { Link, useLocation } from 'react-router-dom';
-import {UserCircleIcon, UserIcon} from '@heroicons/react/24/outline'
+import React from "react";
+import useFetch from "../../hooks/useFetch";
+import { useLocation } from "react-router-dom";
+import CharacterCard from "../Characters/CharacterCard";
 
 function CastAndCrewTab() {
-  const {state} = useLocation();
-  const {data, error, isLoading} = useFetch(`https://api.jikan.moe/v4/anime/${state.mal_id}/characters`);
-  console.log('characters are  ',data);
-  
-  
+  const { state } = useLocation();
+  const { data, error, isLoading } = useFetch(
+    `https://api.jikan.moe/v4/anime/${state.mal_id}/characters`
+  );
+  console.log("characters are  ", data);
+
+  if(isLoading) return <div className="dark:text-white textxl font-bold p-6">در حال بارگذاری کاراکترها</div>
+  if(error) return <div className="dark:text-white textxl font-bold p-6">کاراکتری وجود ندارد</div>
+
+
+  // Separate characters by role
+  const mainCharacters = data.filter((item) => item.role === "Main");
+  const supportingCharacters = data.filter((item) => item.role !== "Main");
+
   return (
-    <div className='dark:text-white p-6'>
-      <h1 className='dark:text-white text-xl font-bold mb-8'>actors</h1>
-      <div className='flex flex-wrap justify-center sm:justify-start gap-6'>
-        {data.map((item) => {
-          return(
-            <div key={item.character.mal_id} className='w-[140px] rounded-3xl overflow-hidden bg-white dark:bg-primary-1-dark'>
-              <div className='w-full h-[150px] flex items-center justify-center bg-purple-800'>
-                <img src={item?.images?.optimized_url} alt="" />
-                {item?.images?.optimized_url && <UserCircleIcon className='w-20'/>}
-              </div>
-              <Link className='flex flex-col px-8 py-5'>
-                <span className='font-bold dark:text-white text-center mb-2'>{item.character.name}</span>
-                <span className='text-[#858585] dark:text-[#DEDEDE]'>{item.role  === 'Main' ? 'کاراکتر اصلی' : 'کاراکتر فرعی'}</span>
-              </Link>
-            </div>
-          )
+    <div className="dark:text-white p-6">
+      <h1 className="dark:text-white text-xl font-bold mb-8">کاراکترها</h1>
+      <div className="space-y-8">
+        <div className="flex flex-wrap justify-center sm:justify-start gap-6">
+        {mainCharacters.map((item) => {
+          return <CharacterCard item={item} key={item.character.mal_id} />;
         })}
       </div>
+      <div className="flex flex-wrap justify-center sm:justify-start gap-6">
+        {supportingCharacters.map((item) => {
+          return <CharacterCard item={item} key={item.character.mal_id} />;
+        })}
+      </div>
+      </div>
     </div>
-  )
+  );
+
 }
 
-export default CastAndCrewTab
+
+export default CastAndCrewTab;

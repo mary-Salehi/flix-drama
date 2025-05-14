@@ -1,4 +1,4 @@
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { useSearchModal } from "../contexts/SearchModalContext";
 import { useSidebar } from "../contexts/SidebarContext";
 import { useTheme } from "../contexts/ThemeContext.";
@@ -20,7 +20,7 @@ const sidebarLinks = [
     id: 3,
     name: "بازیگران",
     icon: "https://flix3drama.com/_app/immutable/assets/profile-2user-5befa9bb.svg",
-    path: "/actors",
+    path: "/characters",
   },
   {
     id: 4,

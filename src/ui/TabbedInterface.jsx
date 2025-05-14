@@ -1,37 +1,10 @@
 import { useState } from "react";
-import CastAndCrewTab from "../PostTabs/CastAndCrewTab";
-import CommentsTab from "../PostTabs/CommentsTab";
-import DescriptionTab from "../PostTabs/DescriptionTab";
-import DownloadTab from "../PostTabs/DownloadTab";
 
-const tabs = [
-  {
-    id: "description",
-    name: "توضیحات",
-    component: <DescriptionTab />,
-  },
-  {
-    id: "download",
-    name: "دانلود",
-    component: <DownloadTab />,
-  },
-  {
-    id: "cast",
-    name: "عوامل",
-    component: <CastAndCrewTab />,
-  },
-  {
-    id: "comments",
-    name: "نظرات",
-    component: <CommentsTab />,
-  },
-];
-
-function TabbedInterface() {
-  const [activeTab, setActiveTab] = useState(tabs[0].id);
+function TabbedInterface({tabs = []}) {
+  const [activeTab, setActiveTab] = useState(tabs[0]?.id);
 
   return (
-    <div>
+    <div className="">
       <div className="flex items-center justify-center border-b border-gray-200 dark:border-[#24152E]">
         {tabs.map((tab) => {
           return (

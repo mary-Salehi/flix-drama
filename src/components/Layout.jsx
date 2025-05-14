@@ -13,6 +13,7 @@ function Layout() {
   }, [location]);
 
   const isSinglePost = location.pathname.startsWith("/post/");
+  const isSingleCharacter = location.pathname.startsWith("/character/");
   const isPostsSection =
     location.pathname.startsWith("/posts/") && !isSinglePost;
 
@@ -26,7 +27,7 @@ function Layout() {
         <div
           id="components"
           className={`min-w-0 ${
-            isSinglePost
+            isSinglePost || isSingleCharacter
               ? "p-0 pb-10 pt-[76px] lg:pt-0"
               : "px-5 py-10 pt-[116px] lg:pt-10"
           } w-full`}

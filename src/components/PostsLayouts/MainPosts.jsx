@@ -81,7 +81,7 @@ function MainPosts() {
   return (
     <div className="w-full relative flex flex-col gap-10">
       <div className="flex flex-col gap-5 items-center">
-        {animeList.map((anime) => (
+        {animeList?.map((anime) => (
           <Anime key={anime.mal_id} anime={anime} page="posts" />
         ))}
       </div>
@@ -98,10 +98,10 @@ function MainPosts() {
                 : "bg-purple-900 hover:bg-purple-700 text-white"
             }`}
           >
-            Prev
+            قبلی
           </button>
 
-          <span className="px-4 py-2 bg-gray-100 rounded-md">Page {page}</span>
+          <span className="px-4 py-2 bg-gray-100 rounded-md">صفحه {page}</span>
 
           <button
             onClick={handleNextPage}
@@ -112,7 +112,7 @@ function MainPosts() {
                 : "bg-purple-900 hover:bg-purple-700 text-white"
             }`}
           >
-            Next
+            بعدی
           </button>
         </div>
       </div>

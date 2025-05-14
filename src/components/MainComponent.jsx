@@ -1,14 +1,14 @@
 import { Route, Routes, useLocation } from "react-router-dom";
 import Layout from "./Layout";
 import Home from "../pages/Home";
-import Posts from "../pages/Posts";
 import Post from "./Post/Post";
-import Actors from "../pages/Actors";
 import PostsLayout from "./PostsLayouts/PostsLayout";
 import MainPosts from "./PostsLayouts/MainPosts";
-import { useEffect } from "react";
 import Login from "../pages/Account/Login";
 import Account from "../pages/Account/Account";
+import Characters from "../pages/Characters";
+import SinglrCharacterDetail from "./Characters/SingleCharacterDetail";
+import Posts from "../pages/Posts";
 
 const sidebarLinks = [
   {
@@ -50,14 +50,17 @@ function MainComponent() {
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
 
-          <Route path="posts" element={<PostsLayout />}>
+          <Route path="posts" element={<Posts/>}>
             <Route index element={<MainPosts />} />
             <Route path=":category" element={<MainPosts />} />
           </Route>
 
           <Route path="post/:title" element={<Post />} />
 
-          <Route path="actors" element={<Actors />} />
+          <Route path="characters" element={<Characters />} />
+
+          <Route path="character/:characterId" element={<SinglrCharacterDetail/>} />
+
         </Route>
         <Route path="account/:page" element={<Account/>}/>
       </Routes>

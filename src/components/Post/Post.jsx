@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useParams } from "react-router-dom";
-import TabbedInterface from "./TabbedInterface";
-import PostImage from "./PostImage";
 import PostDetailsModal from "./PostDetailsModal";
 import PostDetails from "./PostDetails";
 import useFetch, { API_BASE } from "../../hooks/useFetch";
+import BackgroundPoster from "../../ui/BackgroundPoster";
+import PostTabbedInterface from "./PostTabbedInterface";
+
 
 function Post() {
   const { title } = useParams();
@@ -28,13 +29,14 @@ function Post() {
   return (
     <div className="min-h-screen">
       <div className="relative flex flex-col items-center">
-        <PostImage images={data.images} isLoading={isLoading} error={error} />
+        <BackgroundPoster image={data.images?.webp?.large_image_url} isLoading={isLoading} error={error}/>
         <div className="w-full relative -top-32 lg:-top-20 flex flex-col lg:flex-row items-center  gap-8 px-8 pt-5">
           <PostDetailsModal data={data} isLoading={isLoading} />
           <PostDetails data={data} isLoading={isLoading} />
         </div>
       </div>
-      <TabbedInterface />
+      <PostTabbedInterface/>
+      {/* <TabbedInterface /> */}
     </div>
   );
 }
