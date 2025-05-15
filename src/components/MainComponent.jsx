@@ -9,6 +9,7 @@ import Account from "../pages/Account/Account";
 import Characters from "../pages/Characters";
 import SinglrCharacterDetail from "./Characters/SingleCharacterDetail";
 import Posts from "../pages/Posts";
+import { CharacterAnimeProvider } from "./Characters/context/CharacterAnimeContext";
 
 const sidebarLinks = [
   {

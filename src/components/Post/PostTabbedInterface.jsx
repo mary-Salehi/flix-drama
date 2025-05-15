@@ -29,7 +29,7 @@ const singlePostTabs = [
 
 function PostTabbedInterface() {
   return (
-    <div className='bg-red-200'>
+    <div>
       <TabbedInterface tabs={singlePostTabs}/>
     </div>
   )

@@ -36,7 +36,6 @@ function Post() {
         </div>
       </div>
       <PostTabbedInterface/>
-      {/* <TabbedInterface /> */}
     </div>
   );
 }

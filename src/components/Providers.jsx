@@ -8,7 +8,7 @@ function Providers({ children }) {
     <ThemeProvider>
       <SidebarProvider>
         <SearchModalProvider>
-          {children}
+            {children}
         </SearchModalProvider>
       </SidebarProvider>
     </ThemeProvider>

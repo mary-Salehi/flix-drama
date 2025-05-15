@@ -6,26 +6,25 @@ import TitleWithActions from "../../ui/TitleWithActions";
 import FavoriteButton from "../../ui/FavoriteButton";
 import NotificationButton from "../../ui/NotificationButton";
 import CharacterTabbedInterface from "./CharacterTabs/CharacterTabbedInterface";
+import { useCharacterAnime } from "./context/CharacterAnimeContext";
 
 function SingleCharacterDetail() {
   const { characterId } = useParams();
   console.log("the id is...", characterId);
 
+
   const {
-    data: charactersAnime,
+    data: characterAnime,
     isLoading,
     error,
   } = useFetch(`${API_BASE}/characters/${characterId}/anime`);
-  console.log(charactersAnime[0]?.anime?.images.webp.large_image_url);
 
   const { data: character } = useFetch(`${API_BASE}/characters/${characterId}`);
-  console.log(character);
-  console.log(charactersAnime);
-
+  
   return (
     <div className="">
       <BackgroundPoster
-        image={charactersAnime[0]?.anime.images.webp.large_image_url}
+        image={characterAnime[0]?.anime.images.webp.large_image_url}
       />
       <div className="w-full relative -top-32 lg:-top-20 flex flex-col lg:flex-row items-center lg:items-start gap-8 px-8 pt-5">
         <SmallPoster data={character} isLoading={isLoading} />
@@ -43,7 +42,7 @@ function SingleCharacterDetail() {
               لیست انیمه ها :
             </p>
             <div className="flex flex-col gap-3 dark:text-gray-300 text-gray-800 text-end">
-              {charactersAnime.map((item, index) => {
+              {characterAnime.map((item, index) => {
                 return (
                   <div key={index} className="flex justify-end gap-2">
                     <span>{item.anime.title}</span>
@@ -56,7 +55,7 @@ function SingleCharacterDetail() {
         </div>
       </div>
       <div>
-        <CharacterTabbedInterface />
+        <CharacterTabbedInterface characterAnime={characterAnime} />
       </div>
     </div>
   );

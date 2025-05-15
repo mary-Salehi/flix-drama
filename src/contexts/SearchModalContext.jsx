@@ -2,10 +2,16 @@ import { createContext, useContext, useState } from "react";
 
 const SearchModalContext = createContext();
 
-export function SearchModalProvider({children}) {
+export function SearchModalProvider({ children }) {
   const [isOpenSearchModal, setIsOpenSearchModal] = useState(false);
 
-  return <SearchModalContext.Provider value={{isOpenSearchModal , setIsOpenSearchModal}}>{children}</SearchModalContext.Provider>
+  return (
+    <SearchModalContext.Provider
+      value={{ isOpenSearchModal, setIsOpenSearchModal }}
+    >
+      {children}
+    </SearchModalContext.Provider>
+  );
 }
 
 export function useSearchModal() {
