@@ -1,29 +1,54 @@
-import React from 'react'
+import { UserCircleIcon } from "@heroicons/react/24/solid";
+import { Link } from "react-router-dom";
 
-function MiniCard({item}) {
+
+function MiniCard({ item, page, children }) {
+  // data structure based on page type
+  const data = page === "post" ? item.character : item.anime;
+
+  const imageUrl =
+    page === "post"
+      ? data?.images?.webp?.image_url // Character image
+      : data?.images?.webp?.large_image_url; // Anime image
+
+  const id = data?.mal_id;
+  const title = page === "post" ? data?.name : data?.title;
+  const linkPath =
+    page === "post" ? `/character/${id}` : `/post/${encodeURIComponent(title)}`;
+
   return (
-    <div className="flex flex-col w-[140px] rounded-3xl overflow-hidden bg-white dark:bg-primary-1-dark">
-      <div className="w-full h-[150px] flex items-center justify-center bg-purple-800">
-        <img
-          className="w-full h-full object-fit"
-          src={item?.character?.images?.webp?.image_url}
-          alt=""
-        />
-        {!item?.character?.images?.webp?.image_url && (
-          <UserCircleIcon className="w-20" />
+    <div className="flex flex-col w-[140px] rounded-3xl overflow-hidden bg-white dark:bg-primary-1-dark shadow-md hover:scale-105 transition-transform duration-200">
+      {/* Image Section */}
+      <div className="w-full !h-[150px] flex items-center justify-center bg-purple-800">
+        {imageUrl ? (
+          <img
+            className="w-full h-full object-cover"
+            src={imageUrl}
+            alt={title || "Image"}
+            loading="lazy"
+          />
+        ) : (
+          <UserCircleIcon className="w-20 text-white" />
         )}
       </div>
-      <Link  to={`/character/${item?.character?.mal_id}`}
-          className="flex flex-col items-center justify-center px-2 py-5 h-full">
-        <span className="font-bold dark:text-white text-center mb-2">
-          {item.character.name}
+
+      {/* Content Section */}
+      <Link
+        to={linkPath}
+        state={{
+            mal_id: id,
+          }}
+        className="flex flex-col items-center justify-center px-2 py-4"
+      >
+        <span className="font-bold dark:text-white text-center mb-2 line-clamp-2">
+          {title}
         </span>
         <span className="text-[#858585] dark:text-[#DEDEDE]">
-          {item.role === "Main" ? "کاراکتر اصلی" : "کاراکتر فرعی"}
+          {children}
         </span>
       </Link>
     </div>
   );
 }
 
-export default MiniCard
+export default MiniCard;

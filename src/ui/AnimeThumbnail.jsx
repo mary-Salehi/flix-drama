@@ -1,22 +1,34 @@
 import { Link } from "react-router-dom";
+import truncateText from "../utils/truncateText";
 
 //z-80
 
-function AnimeThumbnail({ anime, page }) {
-  console.log(anime.anime.mal_id);
+function AnimeThumbnail({ anime, page ,setIsOpenSearchModal , buttonColor}) {
+  // Handling different data structures based on page
+  const getValue = (key) => {
+    if (page === "recommendations") {
+      return anime.entry?.[key] || anime[key];
+    }
+    if (page === "singleCharacter") {
+      return anime.anime?.[key] || anime[key];
+    }
+    return anime[key];
+  };
+
+  const imageUrl = getValue('images')?.webp?.large_image_url || getValue('image_url');
+  const animeId = getValue('mal_id');
+  const animeTitle = getValue('title');
+  const titleJapanese = getValue('title_japanese');
+  const titleEnglish = getValue('title_english');
 
   return (
     <div
-      key={page === "singleCharacter" ? anime.anime.mal_id : anime.mal_id}
+      key={animeId}
       className="w-full sm:max-w-[420px] h-[95px] flex bg-white opacity-100 z-[10] rounded-3xl overflow-hidden dark:bg-primary-1-dark shadow-md"
     >
       <div className="h-full text-center text-white bg-purple-500 w-[96px]">
         <img
-          src={
-            page === "singleCharacter"
-              ? anime.anime.images.webp.large_image_url
-              : anime.images?.webp.large_image_url
-          }
+          src={imageUrl}
           alt={anime.title_english || "image"}
           className="text-xs h-full w-full object-fit"
         />
@@ -24,38 +36,25 @@ function AnimeThumbnail({ anime, page }) {
       <div className="p-4 w-full flex items-center justify-between gap-3 dark:text-white">
         <div>
           {page === "singleCharacter" ? (
-            <p>{anime.anime.title}</p>
+            <p>{truncateText(anime.anime.title, 20)}</p>
           ) : (
             <div>
-              <p className="dark:text-white text-sm font-semibold truncate">
-                {anime.title_japanese}
+              <p className="dark:text-white text-sm font-semibold truncate line-clamp-2">
+                {truncateText(titleJapanese, 10) || animeTitle}
               </p>
               <p className="text-xs text-slate-400 truncate">
-                {anime.title_english}
+                {truncateText(titleEnglish, 20)}
               </p>
             </div>
           )}
         </div>
-
         <Link
-          to={`/post/${encodeURIComponent(
-            page === "singleCharacter" ? anime.anime.title : anime.title
-          )}`}
+          to={`/post/${encodeURIComponent(animeTitle)}`}
           state={{
-            mal_id:
-              page === "singleCharacter" ? anime.anime.mal_id : anime.mal_id,
+            mal_id: animeId,
           }}
-          // to={{
-          //   pathname: `/post/${encodeURIComponent(
-          //     page === "singleCharacter" ? anime.anime.title : anime.title
-          //   )}`,
-          //   state: {
-          //     mal_id:
-          //       page === "singleCharacter" ? anime.anime.mal_id : anime.mal_id,
-          //   },
-          // }}
-          onClick={() => setIsOpenSearchModal(false)}
-          className="bg-yellow-primary text-white rounded-md text-center p-2 px-4"
+          onClick={() => setIsOpenSearchModal?.(false)}
+          className={`${buttonColor} bg-yellow-primary text-white rounded-md text-center p-2 px-4`}
         >
           مشاهده
         </Link>

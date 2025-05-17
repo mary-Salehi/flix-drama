@@ -3,6 +3,7 @@ import { useTheme } from "../../contexts/ThemeContext.";
 import { Link } from "react-router-dom";
 import { useSearchModal } from "../../contexts/SearchModalContext";
 import useFetch from "../../hooks/useFetch";
+import AnimeThumbnail from "../../ui/AnimeThumbnail";
 
 function SearchModal() {
   const { theme } = useTheme();
@@ -108,36 +109,37 @@ function SearchModal() {
           <div className="flex flex-col justify-center items-center gap-3 mt-5 ">
             {searchResults.slice(0, 3).map((anime) => {
               return (
-                <div
-                  key={anime.mal_id}
-                  className="w-full sm:max-w-[380px] h-[95px] flex bg-white opacity-100 z-[80] rounded-xl overflow-hidden dark:bg-primary-1-dark shadow-md"
-                >
-                  <div className="h-full text-center text-white bg-purple-500 w-[96px]">
-                    <img
-                      src={anime.images?.webp.large_image_url}
-                      alt={anime.title_english}
-                      className="text-xs h-full w-full object-fit"
-                    />
-                  </div>
-                  <div className="p-4 w-full flex items-center justify-between gap-3">
-                    <div>
-                      <p className="dark:text-white text-sm font-semibold">
-                        {anime.title_japanese}
-                      </p>
-                      <p className="text-xs text-slate-400">
-                        {anime.title_english}
-                      </p>
-                    </div>
-                    <Link
-                      to={`/post/${encodeURIComponent(anime.title)}`}
-                      state={{ mal_id: anime.mal_id }}
-                      onClick={() => setIsOpenSearchModal(false)}
-                      className="bg-yellow-primary text-white rounded-md text-center p-2 px-4"
-                    >
-                      مشاهده
-                    </Link>
-                  </div>
-                </div>
+                // <div
+                //   key={anime.mal_id}
+                //   className="w-full sm:max-w-[380px] h-[95px] flex bg-white opacity-100 z-[80] rounded-xl overflow-hidden dark:bg-primary-1-dark shadow-md"
+                // >
+                //   <div className="h-full text-center text-white bg-purple-500 w-[96px]">
+                //     <img
+                //       src={anime.images?.webp.large_image_url}
+                //       alt={anime.title_english}
+                //       className="text-xs h-full w-full object-fit"
+                //     />
+                //   </div>
+                //   <div className="p-4 w-full flex items-center justify-between gap-3">
+                //     <div>
+                //       <p className="dark:text-white text-sm font-semibold">
+                //         {anime.title_japanese}
+                //       </p>
+                //       <p className="text-xs text-slate-400">
+                //         {anime.title_english}
+                //       </p>
+                //     </div>
+                //     <Link
+                //       to={`/post/${encodeURIComponent(anime.title)}`}
+                //       state={{ mal_id: anime.mal_id }}
+                //       onClick={() => setIsOpenSearchModal(false)}
+                //       className="bg-yellow-primary text-white rounded-md text-center p-2 px-4"
+                //     >
+                //       مشاهده
+                //     </Link>
+                //   </div>
+                // </div>
+                <AnimeThumbnail key={anime.mal_id} anime={anime} setIsOpenSearchModal={setIsOpenSearchModal} page='search'/>
               );
             })}
             {searchResults && searchResults.length === 0 ? (

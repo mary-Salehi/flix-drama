@@ -3,12 +3,9 @@ import useFetch, { API_BASE } from "../../../hooks/useFetch";
 import AnimeThumbnail from "../../../ui/AnimeThumbnail";
 import { useCharacterAnime } from "../context/CharacterAnimeContext";
 
-const anime = "ji";
 
 function BiograghyTab() {
   const {characterId} = useParams();
-  console.log('id from bio',characterId);
-  
 
   const {
       data: characterAnime,
@@ -16,7 +13,7 @@ function BiograghyTab() {
       error,
     } = useFetch(`${API_BASE}/characters/${characterId}/anime`);
   
-    console.log('bio page', characterAnime);
+    console.log('anime data is...' , characterAnime);
     
 
   return (
