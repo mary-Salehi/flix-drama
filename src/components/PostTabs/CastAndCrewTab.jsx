@@ -1,12 +1,16 @@
 import useFetch from "../../hooks/useFetch";
 import { useLocation } from "react-router-dom";
 import MiniCard from "../../ui/MiniCard";
+import { useLoadMore } from "../../hooks/useLoadMore";
+import LoadMoreButton from "../../ui/LoadMoreButton";
 
 function CastAndCrewTab() {
   const { state } = useLocation();
   const { data, error, isLoading } = useFetch(
     `https://api.jikan.moe/v4/anime/${state.mal_id}/characters`
   );
+
+  const { visibleCount, loadMore, hasMore } = useLoadMore(8, 8);
 
   // Separate characters by role
   const mainCharacters = data.filter((item) => item.role === "Main");
@@ -40,14 +44,22 @@ function CastAndCrewTab() {
               })}
             </div>
             <div className="flex flex-wrap justify-center sm:justify-start gap-6">
-              {supportingCharacters.map((item) => {
-                return (
-                  <MiniCard item={item} key={item.character.mal_id} page="post">
-                    {"کاراکتر فرعی"}
-                  </MiniCard>
-                );
-              })}
+              {supportingCharacters
+                .slice(0, visibleCount)
+                .map((item) => {
+                  return (
+                    <MiniCard key={item.character.mal_id} item={item} page="post">
+                        {"کاراکتر فرعی"}
+                      </MiniCard>
+                  );
+                })}
             </div>
+            <LoadMoreButton
+              onClick={loadMore}
+              hasMore={hasMore(supportingCharacters.length)}
+              text="نمایش بیشتر"
+              loadingText="در حال بارگذاری..."
+            />
           </div>
         </>
       )}

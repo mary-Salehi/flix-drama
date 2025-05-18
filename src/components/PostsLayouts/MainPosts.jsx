@@ -7,32 +7,23 @@ import {
   useSearchParams,
 } from "react-router-dom";
 import Anime from "../Anime";
+import PaginationControls from "../../ui/PaginationControls";
+import useUrlPagination from "../../hooks/useUrlPagination";
 
 function MainPosts() {
   let { category } = useParams();
-  const [searchParams, setSearchParams] = useSearchParams();
-  const location = useLocation();
 
-  const searchQuery = searchParams.get("query");
-  const urlPage = parseInt(searchParams.get("page")) || 1;
-
-  const [page, setPage] = useState(urlPage);
-  const [hasNextPage, setHasNextPage] = useState(true);
-  const itemsPerPage = 10;
-
-  // Sync state with URL changes
-  useEffect(() => {
-    const currentPage = parseInt(searchParams.get("page")) || 1;
-    setPage(currentPage);
-  }, [location.search]); // Trigger when URL search params change
-
-  // Reset page to 1 when search query changes-✅
-  useEffect(() => {
-    const params = new URLSearchParams(searchParams);
-    params.set("page", "1");
-    setSearchParams(params, { replace: true });
-  }, [searchQuery]);
-  
+  const {
+    page,
+    itemsPerPage,
+    hasNextPage,
+    searchQuery,
+    setItemsPerPage,
+    setHasNextPage,
+    goToPage,
+    nextPage,
+    prevPage
+  } = useUrlPagination()
 
   const apiUrl = searchQuery
     ? `${API_BASE}/anime?q=${encodeURIComponent(
@@ -50,25 +41,6 @@ function MainPosts() {
     }
   }, [pagination]);
 
-  const handleNextPage = () => {
-    if (hasNextPage) {
-      const newPage = page + 1;
-      const params = new URLSearchParams(searchParams);
-      params.set("page", newPage.toString());
-      setSearchParams(params);
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }
-  };
-
-  const handlePrevPage = () => {
-    if (page > 1) {
-      const newPage = page - 1;
-      const params = new URLSearchParams(searchParams);
-      params.set("page", newPage.toString());
-      setSearchParams(params);
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }
-  };
 
   if (isLoading) {
     return (
@@ -86,36 +58,7 @@ function MainPosts() {
         ))}
       </div>
 
-      {/* pagination buttons */}
-      <div className="flex justify-center items-center mt-8 gap-4">
-        <div className="flex justify-center items-center mt-8 gap-4">
-          <button
-            onClick={handlePrevPage}
-            disabled={page === 1 || isLoading}
-            className={`flex items-center justify-center w-[100px] px-4 py-2 rounded-md ${
-              page === 1
-                ? "bg-gray-300 cursor-not-allowed"
-                : "bg-purple-900 hover:bg-purple-700 text-white"
-            }`}
-          >
-            قبلی
-          </button>
-
-          <span className="px-4 py-2 bg-gray-100 rounded-md">صفحه {page}</span>
-
-          <button
-            onClick={handleNextPage}
-            disabled={!hasNextPage || isLoading}
-            className={`flex items-center justify-center px-4 py-2 w-[100px] rounded-md ${
-              !hasNextPage
-                ? "bg-gray-300 cursor-not-allowed"
-                : "bg-purple-900 hover:bg-purple-700 text-white"
-            }`}
-          >
-            بعدی
-          </button>
-        </div>
-      </div>
+      <PaginationControls page={page} prevPage={prevPage} nextPage={nextPage} hasNextPage={hasNextPage} isLoading={isLoading}/>
     </div>
   );
 }
