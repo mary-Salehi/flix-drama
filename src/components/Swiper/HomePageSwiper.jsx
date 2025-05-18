@@ -4,7 +4,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import useFetch from "../../hooks/useFetch";
 import "swiper/css/scrollbar";
-import Anime from "../Anime";
+import Anime from "../../ui/Anime";
 
 function HomePageAnimeSwiper({ page, category, title, endpoint }) {
   const navigate = useNavigate();
@@ -26,10 +26,13 @@ function HomePageAnimeSwiper({ page, category, title, endpoint }) {
     navigate(`posts/${category}`);
   };
 
-  if (error) return <div className="dark:text-white  text-black/70">محتوا یافت نشد</div>;
+  if (error)
+    return <div className="dark:text-white  text-black/70">محتوا یافت نشد</div>;
 
   if (isLoading)
-    return <div className="text-center py-8 dark:text-white">در حال بارگذاری</div>;
+    return (
+      <div className="text-center py-8 dark:text-white">در حال بارگذاری</div>
+    );
 
   return (
     <div className={`${getClasses()} flex flex-col`}>

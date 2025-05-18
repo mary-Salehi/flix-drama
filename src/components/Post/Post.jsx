@@ -11,18 +11,12 @@ function Post() {
   const { title } = useParams();
   const decodedTitle = decodeURIComponent(title);
   const {state} = useLocation();
-  console.log(title);
-  console.log("location state: ", state);
 
   const { data, error, isLoading } = useFetch(
     `${API_BASE}/anime/${state.mal_id}/full`
   );
-  console.log('loding single post: ',isLoading);
-  console.log('single anime ', data);
-  
-  
 
-  if (isLoading) return <h1 className="text-black/50 dark:text-white text-4xl text-center pt-5">در حال بارگذاری</h1>;
+  if (isLoading) return <h1 className="text-black/50 dark:text-white text-4xl text-center pt-5">...در حال بارگذاری</h1>;
   if (error) return <div>{error.message}</div>;
   if (!data) return <div>محتوا یافت نشد</div>;
 

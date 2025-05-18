@@ -3,6 +3,7 @@ import VerticalSwiper from "../Swiper/VerticalSwiper";
 import AnimeThumbnail from "../../ui/AnimeThumbnail";
 import useFetch, { API_BASE } from "../../hooks/useFetch";
 import { useLocation } from "react-router-dom";
+import Loader from "../../ui/Loader";
 
 function DescriptionTab() {
   const location = useLocation();
@@ -10,7 +11,7 @@ function DescriptionTab() {
     `${API_BASE}/anime/${location.state.mal_id}/recommendations`
   );
   console.log(data);
-  const animeRecomendations = data.slice(0, 6);
+  const animeRecomendations = data.slice(0, 15);
   console.log(animeRecomendations);
 
   return (
@@ -58,22 +59,24 @@ function DescriptionTab() {
             </button>
           </div>
         </div>
-        {isLoading && <div className="dark:text-white">در حال بارگذاری محتوا</div>}
-        {
-          !error && !isLoading && (
-            <VerticalSwiper
-        slidesPerView={3}
-          data={animeRecomendations}
-          renderItem={(animeRecomendations) => (
-            <AnimeThumbnail
-              anime={animeRecomendations}
-              page="recommendations"
-              buttonColor="bg-[#7C03D0]"
-            />
-          )}
-        />
-          )
-        }
+        {animeRecomendations.length === 0 && (
+          <div className="text-lg font-semibold w-full text-gray-600 dark:text-gray-300 text-center rounded-md py-8 mt-10">متاسفانه انیمه ای یافت نشد :(</div>
+        )}
+        {isLoading && <Loader text="در حال بارگذاری محتوا" />}
+        {!error && !isLoading && (
+          <VerticalSwiper
+            slidesPerView={3}
+            data={animeRecomendations}
+            renderItem={(animeRecomendations) => (
+              <AnimeThumbnail
+                isLoading={isLoading}
+                anime={animeRecomendations}
+                page="recommendations"
+                buttonColor="bg-[#7C03D0]"
+              />
+            )}
+          />
+        )}
       </div>
     </div>
   );

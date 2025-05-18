@@ -1,7 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import truncateText from "../utils/truncateText";
 
 function Anime({ anime, page, isLoading }) {
+  console.log("anime data", anime);
+  const genres = anime.genres.map((g) => g.name).join(",");
+  console.log(genres);
+
   return (
     <div
       className={`h-full flex flex-col sm:flex-row justify-between p-3 bg-white dark:bg-[#24152E] rounded-3xl ${
@@ -12,7 +17,7 @@ function Anime({ anime, page, isLoading }) {
         <div className="!w-[100px] h-full">
           {isLoading ? (
             <div className="w-full h-full rounded-xl flex items-center justify-center bg-purple-950 text-white text-xs">
-              loading image
+              در حال بارگذاری
             </div>
           ) : (
             <img
@@ -40,35 +45,7 @@ function Anime({ anime, page, isLoading }) {
               {anime.title_english || anime.title}
             </h3>
           </div>
-          <div className="w-full px-2 py-[6px] inline-block  dark:text-[#00FFFF] text-[#057E7E] bg-[#d6f8f2] dark:bg-[#1a2b2b] rounded-lg">
-            زیرنویس قسمت {anime.latestSubtitle} اضافه شد
-          </div>
-          <div className="flex justify-between">
-            <div>
-              <span className="text-[#777777] dark:text-white">
-                تاریخ بروزرسانی :
-              </span>
-              <span className="dark:text-white"> {anime.lastUpdate}</span>
-            </div>
-            <div className={`${page === "home" ? "hidden" : "block"}`}>
-              <span className="text-[#777777] dark:text-white">
-                آخرین قسمت :
-              </span>
-              <span className="dark:text-white"> {anime.latestEpisode}</span>
-            </div>
-          </div>
-          <div className={`${page === "posts" ? "hidden" : "block"}`}>
-            <span className="text-[#777777] dark:text-white">آخرین قسمت :</span>
-            <span className="dark:text-white"> {anime.latestEpisode}</span>
-          </div>
-          <div className={`${page === "home" ? "hidden" : "block"}`}>
-            <span className="text-[#777777] dark:text-white">آخرین قسمت :</span>
-            <span className="dark:text-white"> {anime.latestEpisode}</span>
-          </div>
-          <div className={`${page === "home" ? "hidden" : "block"}`}>
-            <span className="text-[#777777] dark:text-white">آخرین قسمت :</span>
-            <span className="dark:text-white"> {anime.summary}</span>
-          </div>
+          <AnimeDetail anime={anime} page={page}/>
         </div>
       </div>
       <div className="flex sm:flex-col-reverse items-center sm:items-end justify-between min-w-fit">
@@ -84,7 +61,7 @@ function Anime({ anime, page, isLoading }) {
             page === "home" ? "text-white" : "text-black"
           }`}
         >
-          {anime.score || anime.rank || '-'}
+          {anime.score || anime.rank || "-"}
         </span>
       </div>
     </div>
@@ -92,3 +69,45 @@ function Anime({ anime, page, isLoading }) {
 }
 
 export default Anime;
+
+function AnimeDetail({ anime, page, truncateLength = 135 }) {
+  const genresText =
+    anime.genres?.map((g) => g.name).join(" , ") ?? "مشخص نیست";
+
+  const DetailsPostPage = [
+    { "قسمت ها": anime.episodes || 1 },
+    { ژانرها: genresText },
+    { سال: anime.year || "مشخص نیست" },
+    { "خلاصه داستان": truncateText(anime.synopsis, truncateLength) },
+  ];
+
+  const DetailsHomePage = [
+    { "قسمت ها": anime.episodes || 1 },
+    { "رده سنی": anime.rating || "_" },
+  ];
+
+  const details = page === "home" ? DetailsHomePage : DetailsPostPage;
+  return (
+    <div className="space-y-3"
+    >
+      <div className="w-full px-2 py-[6px] inline-block  dark:text-[#00FFFF] text-[#057E7E] bg-[#d6f8f2] dark:bg-[#1a2b2b] rounded-lg flex-1">
+        زیرنویس قسمت {anime.latestSubtitle} اضافه شد
+      </div>
+      <div className={ `flex flex-col gap-3${
+        page === "posts"
+          ? "flex md:flex-row justify-between gap-3 flex-wrap"
+          : ""
+      }`}>
+        {details.map((item, index) => {
+        const [key, value] = Object.entries(item)[0];
+        return (
+          <div key={index} className="">
+            <span className="text-[#777777] dark:text-white">{key} :</span>
+            <span className="dark:text-white"> {value}</span>
+          </div>
+        );
+      })}
+      </div>
+    </div>
+  );
+}

@@ -1,3 +1,4 @@
+import Loader from "./Loader";
 
 function BackgroundPoster({isLoading,image}) {
   console.log(image);
@@ -7,7 +8,7 @@ function BackgroundPoster({isLoading,image}) {
     <div className="w-full [mask-image:linear-gradient(to_top,transparent_0%,white)] dark:[mask-image:linear-gradient(to_top,transparent_0%,yellow-70%)]">
       {isLoading ? (
         <div className="flex justify-center w-full h-[240px] bg-gradient-to-r from-purple-400 to-purple-700">
-          در حال بارگزاری عکس
+          <Loader text="در حال بارگذاری عکس"/>
         </div>
       ) : (
         <img

@@ -60,15 +60,17 @@ function PostDetails({ data, isLoading }) {
       </div>
 
       <div className="flex flex-col lg:flex-row gap-8 justify-between items-start">
-        <div className="flex items-center gap-x-3">
+        <div className="flex items-start gap-x-3">
           <div className="font-bold text-[#787878] dark:text-[#C7C7C7] ml-2">
             ژانر
           </div>
-          {data?.genres?.map((genre) => (
+          <div className="flex items-center gap-2 flex-wrap">
+            {data?.genres?.map((genre) => (
             <div key={genre.name} className="bg-[#7C03D0] text-sm text-center text-white px-3 py-2 rounded-md font-bold">
               {genre.name}
             </div>
           ))}
+          </div>
         </div>
 
         <div className="text-sm  flex flex-col gap-2">

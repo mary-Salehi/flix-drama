@@ -37,7 +37,7 @@ function CastAndCrewTab() {
             <div className="flex flex-wrap justify-center sm:justify-start gap-6">
               {mainCharacters.map((item) => {
                 return (
-                  <MiniCard item={item} key={item.character.mal_id} page="post">
+                  <MiniCard isLoading={isLoading} item={item} key={item.character.mal_id} page="post">
                     {"کاراکتر اصلی"}
                   </MiniCard>
                 );
@@ -48,7 +48,7 @@ function CastAndCrewTab() {
                 .slice(0, visibleCount)
                 .map((item) => {
                   return (
-                    <MiniCard key={item.character.mal_id} item={item} page="post">
+                    <MiniCard isLoading={isLoading} key={item.character.mal_id} item={item} page="post">
                         {"کاراکتر فرعی"}
                       </MiniCard>
                   );
