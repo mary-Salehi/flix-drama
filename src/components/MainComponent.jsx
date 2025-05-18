@@ -1,5 +1,5 @@
 import { Route, Routes, useLocation } from "react-router-dom";
-import Layout from "./Layout";
+// import Layout from "./Layout";
 import Home from "../pages/Home";
 import Post from "./Post/Post";
 import PostsLayout from "./PostsLayouts/PostsLayout";
@@ -10,6 +10,7 @@ import Characters from "../pages/Characters";
 import SinglrCharacterDetail from "./Characters/SingleCharacterDetail";
 import Posts from "../pages/Posts";
 import { CharacterAnimeProvider } from "./Characters/context/CharacterAnimeContext";
+import Layout from "../ui/Layout";
 
 const sidebarLinks = [
   {

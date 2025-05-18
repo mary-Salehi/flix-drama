@@ -5,7 +5,7 @@ import "swiper/css/navigation";
 
 function VerticalSwiper({ data, slidesPerView, renderItem }) {
   return (
-    <div className="flex flex-col mx-auto w-full max-w-[430px] h-[340px]">
+    <div className={`flex flex-col mx-auto w-full max-w-[430px]  h-[340px]`}>
       <Swiper
         direction={"vertical"}
         slidesPerView={slidesPerView}

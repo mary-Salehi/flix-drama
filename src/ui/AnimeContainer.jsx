@@ -1,5 +1,4 @@
-
-import HomePageAnimeSwiper from "./Swiper/HomePageSwiper";
+import HomePageAnimeSwiper from "../components/Swiper/HomePageSwiper";
 
 const animeCategory = [
   {
@@ -17,21 +16,6 @@ const animeCategory = [
     title: 'top tv',
     endpoint: 'https://api.jikan.moe/v4/top/anime?filter=bypopularity'
   },
-  // {
-  //   category: 'popular',
-  //   title: 'Current Season',
-  //   endpoint: 'https://api.jikan.moe/v4/top/anime?filter=bypopularity'
-  // },
-  // {
-  //   category: 'popular-dramas',
-  //   title: 'Popular Dramas',
-  //   endpoint: 'https://api.jikan.moe/v4/anime?genres=8&order_by=popularity'
-  // },
-  // {
-  //   category: 'highest-rated',
-  //   title: 'Highest Rated',
-  //   endpoint: 'https://api.jikan.moe/v4/top/anime?filter=bypopularity'
-  // }
 ];
 
 function AnimeContainer() {

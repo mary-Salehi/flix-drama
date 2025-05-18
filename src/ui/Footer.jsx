@@ -14,7 +14,7 @@ function Footer() {
         <a className="flex items-center gap-5" href="">
           <img src="https://flix3drama.com/_app/immutable/assets/send-2-2fb1adc7.svg" alt="instagram-logo" />
           <div className="text-white">
-            <p className="font-bold">ما را در اینستاگرام دنبال کنید.</p>
+            <p className="font-bold">ما را در تلگرام دنبال کنید.</p>
             <p className="opacity-60">FlixDrama.Official</p>
           </div>
         </a>
@@ -23,7 +23,7 @@ function Footer() {
         <a className="flex items-center gap-5" href="">
           <img src="https://flix3drama.com/_app/immutable/assets/android-10bc200c.svg" alt="instagram-logo" />
           <div className="text-white">
-            <p className="font-bold">ما را در اینستاگرام دنبال کنید.</p>
+            <p className="font-bold">دانلود اپلیکیشن اندروید</p>
             <p className="opacity-60">FlixDrama.Official</p>
           </div>
         </a>

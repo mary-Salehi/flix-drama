@@ -3,7 +3,8 @@ import Footer from "./Footer";
 import Sidebar from "./Sidebar";
 import { Outlet, useLocation } from "react-router-dom";
 import Header from "./Header";
-import SearchModal from "./search/SearchModal";
+import SearchModal from "../components/search/SearchModal";
+
 
 function Layout() {
   const location = useLocation();

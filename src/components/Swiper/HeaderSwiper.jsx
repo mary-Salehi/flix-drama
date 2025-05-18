@@ -18,7 +18,7 @@ function HeaderSwiper() {
         <div className="w-full min-h-full pt-24">
           <Loader
             font="font-bold"
-            text="xl3"
+            textSize="xl3"
             textColor="text-black/40 dark:text-white"
           />
         </div>
