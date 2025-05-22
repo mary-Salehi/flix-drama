@@ -38,9 +38,7 @@ function MainPosts() {
   }, [pagination]);
 
   if (isLoading) {
-    return (
-      <Loader/>
-    );
+    return <Loader />;
   }
 
   return (
@@ -50,14 +48,15 @@ function MainPosts() {
           <Anime key={anime.mal_id} anime={anime} page="posts" />
         ))}
       </div>
-
-      <PaginationControls
-        page={page}
-        prevPage={prevPage}
-        nextPage={nextPage}
-        hasNextPage={hasNextPage}
-        isLoading={isLoading}
-      />
+      {!isLoading && !error && animeList.length > 0 && (
+        <PaginationControls
+          page={page}
+          prevPage={prevPage}
+          nextPage={nextPage}
+          hasNextPage={hasNextPage}
+          isLoading={isLoading}
+        />
+      )}
     </div>
   );
 }

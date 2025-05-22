@@ -1,16 +1,12 @@
-import { Route, Routes, useLocation } from "react-router-dom";
-// import Layout from "./Layout";
+import { Route, Routes } from "react-router-dom";
 import Home from "../pages/Home";
 import Post from "./Post/Post";
-import PostsLayout from "./PostsLayouts/PostsLayout";
 import MainPosts from "./PostsLayouts/MainPosts";
-import Login from "../pages/Account/Login";
-import Account from "../pages/Account/Account";
 import Characters from "../pages/Characters";
 import SinglrCharacterDetail from "./Characters/SingleCharacterDetail";
 import Posts from "../pages/Posts";
-import { CharacterAnimeProvider } from "./Characters/context/CharacterAnimeContext";
 import Layout from "../ui/Layout";
+import Auth from "../pages/Auth";
 
 const sidebarLinks = [
   {
@@ -64,7 +60,7 @@ function MainComponent() {
           <Route path="character/:characterId" element={<SinglrCharacterDetail/>} />
 
         </Route>
-        <Route path="account/:page" element={<Account/>}/>
+        <Route path="account/:page" element={<Auth/>}/>
       </Routes>
     </main>
   );

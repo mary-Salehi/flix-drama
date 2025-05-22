@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import truncateText from '../../utils/truncateText'
 
 function SingleCharacter({ character }) {
   
@@ -37,7 +38,7 @@ function SingleCharacter({ character }) {
             alt={character.name}
           />
         </div>
-        <div className="font-bold dark:text-white">{character.name}</div>
+        <div className="font-bold dark:text-white">{truncateText(character.name,15)}</div>
       </Link>
     </div>
   );

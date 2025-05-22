@@ -3,9 +3,7 @@ import { Link } from "react-router-dom";
 import truncateText from "../utils/truncateText";
 
 function Anime({ anime, page, isLoading }) {
-  console.log("anime data", anime);
   const genres = anime.genres.map((g) => g.name).join(",");
-  console.log(genres);
 
   return (
     <div

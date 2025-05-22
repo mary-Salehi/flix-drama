@@ -3,7 +3,8 @@ import useFetch, { API_BASE } from "../../hooks/useFetch";
 import SingleCharacter from "./SingleCharacter";
 import { useLocation } from "react-router-dom";
 import useUrlPagination from "../../hooks/useUrlPagination";
-import PaginationButtons from "../Pagination/PaginationButtons";
+import PaginationControls from "../../ui/PaginationControls";
+// import PaginationButtons from "../Pagination/PaginationButtons";
 
 function CharactersContainer() {
   const { state } = useLocation();
@@ -24,8 +25,6 @@ function CharactersContainer() {
     error,
   } = useFetch(`${API_BASE}/characters?${getPaginationQuery()}`);
 
-  console.log(characters);
-  
   // Sync pagination info from API
   useEffect(() => {
     if (pagination) {
@@ -42,12 +41,14 @@ function CharactersContainer() {
           );
         })}
       </div>
-      <PaginationButtons
-        handleNextPage={nextPage}
-        handlePrevPage={prevPage}
-        page={page}
-        hasNextPage={hasNextPage}
-      />
+      {!isLoading && !error && characters.length > 0 && (
+        <PaginationControls
+          page={page}
+          nextPage={nextPage}
+          prevPage={prevPage}
+          hasNextPage={hasNextPage}
+        />
+      )}
     </div>
   );
 }
